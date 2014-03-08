@@ -8,7 +8,7 @@
 		public function all()
 		{
 
-			$compradores = $this->generic("SELECT * FROM compradores", array(), 'Comprador');
+			$compradores = $this->generic("SELECT * FROM comprador", array(), 'Comprador');
 
 			return $compradores;
 
@@ -16,7 +16,7 @@
 
 		public function byId(/* int */ $id)
 		{
-			$compradores = $this->generic("SELECT * FROM compradores WHERE id=?", array($id), 'Comprador');
+			$compradores = $this->generic("SELECT * FROM comprador WHERE id=?", array($id), 'Comprador');
 
 			return $compradores;
 		}

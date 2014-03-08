@@ -32,7 +32,7 @@ class FDB {
       $values = array();
 
     try {
-      $sth = $db->prepare($sql);
+      $sth = $this->db->prepare($sql);
       $sth->execute($values);
       $res = array();
       while( ($row = $sth->fetch(PDO::FETCH_ASSOC)) != false)

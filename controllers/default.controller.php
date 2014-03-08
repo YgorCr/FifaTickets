@@ -13,13 +13,22 @@
 		{
 			$objects = array();
 
-			$res = $this->bd->execSql($sql, $values);
+			try {
+				$res = $this->bd->execSql($sql, $values);
+			} catch(Exception $e) {
+				print_r($e->getMessage());
+			}
 
-			foreach ($res as $key => $value) {
-				$object = new $class();
-				$object->set($key, $value);
+			for($i=0;$i<count($res);$i++)
+			{
+				$robj = $res[$i];
 
-				$objects[] = $object;
+				foreach ($robj as $key => $value) {
+					$object = new $class();
+					$object->set($key, $value);
+
+					$objects[] = $object;
+				}
 			}
 
 			return $objects;
