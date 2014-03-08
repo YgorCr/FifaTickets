@@ -13,7 +13,7 @@
 		{
 			$objects = array();
 
-			$res = $bd->execSql($sql, $values);
+			$res = $this->bd->execSql($sql, $values);
 
 			foreach ($res as $key => $value) {
 				$object = new $class();

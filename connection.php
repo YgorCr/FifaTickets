@@ -1,6 +1,6 @@
 <?php
 
-require_once('config.php');
+include('config.php');
 
 class FDB {
 
@@ -14,9 +14,8 @@ class FDB {
           $name = $config["dbname"];
           $user = $config["dbuser"];
           $pass = $config["dbpass"];
-          //instancia o objeto PDO, conectando com o banco mysql
-          // $conn = new PDO("mysql:host=$host;port=3306;dbname=$name", $user, $pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-          $conn = new PDO("pgsql:host=$host dbname=$name user=$user password=$pass");
+          //instancia o objeto PDO, conectando com o banco postgresql
+          $conn = new PDO("pgsql:dbname=ufpbdb;host=localhost;user=postgres;password=postgres");
           $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           $this->db = $conn;
       }
@@ -31,7 +30,7 @@ class FDB {
   {
     if(count($args)==1)
       $values = array();
-    
+
     try {
       $sth = $db->prepare($sql);
       $sth->execute($values);

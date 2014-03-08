@@ -3,7 +3,7 @@
 	$config = array();
 	$config["dbhost"] = "localhost";
 	$config["dbname"] = "ufpbdb";
-	$config["dbuser"] = "postegres";
-	$config["dbpass"] = "postegres";
+	$config["dbuser"] = "postgres";
+	$config["dbpass"] = "postgres";
 
 ?>
