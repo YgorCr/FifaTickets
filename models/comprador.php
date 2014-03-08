@@ -1,11 +1,9 @@
 <!-- *******TESTE********* -->
 <?php
-	$comp1 = new Comprador("ygor", 123, 1234, "PB", "João Pessoa", "dos milagres", "cristo", "do lado da minha vizinha", "YgorCr", "123Cr");
+	$comp1 = new Comprador("ygor", 123456789, 1234456789, "PB", "João Pessoa", "dos milagres", "cristo", "do lado da minha vizinha", "12345678901234567890123456789012");
 
 	$all = $comp1->get("attr");
 	$comp1->set("nome","mudou \o/");
-
-	"nome".length();
 
 	foreach ($all as &$value) {
 		echo $comp1->get($value)."<br>";
@@ -31,21 +29,17 @@
 			$args = func_get_args();
 			$numArgs = func_num_args();
 
-			foreach ($args as $key => $value) {
-				echo $key;
-			}
-			
 			if($numArgs < 9){
 				echo "ERROR: objetos comprador não aceitam campos nulos.";
 			}
 			else{
 				$i = 0;
 				foreach ($this->attr as &$attrName) {
-					if(validaCampo($attrName, $args[$i])){
+					if(Comprador::validaCampo($attrName, $args[$i])){
 						$this->$attrName = $args[$i++];
 					}
 					else{
-						throw new Exception(errorMsg($attrName), 1);
+						throw new Exception(Comprador::errorMsg($attrName), 1);
 					}
 				}
 			}
@@ -56,80 +50,70 @@
 		}
 
 		public function set($attrName, $attrValue){
-			if(validaCampo($attrName, $args[$i])){
+			if(Comprador::validaCampo($attrName, $attrValue)){
 				$this->$attrName = $attrValue;
 			}
 			else{
-				throw new Exception(errorMsg($attrName), 1);
+				throw new Exception(Comprador::errorMsg($attrName), 1);
 			}
 		}
 
-		private function errorMsg($attrName){
+		private static function validaCampo($attrName, $attrValue){
+			$attrValue = print_r($attrValue, true);
+			$tam = strlen($attrValue);
+
 			switch ($attrName) {
 				case 'nome':
-					return 'O campo "Nome" é obrigatório. Por favor, tente novamente.'
-					break;
-				
+					return ($tam > 0);
+					
 				case 'cpf_cod':
-					return 'O campo "CPF/Cod" deve é obrigatório e deve ser preenchido com no máximo 15 caracteres. Por favor, tente novamente.'
-					break;
-				
+					return ($tam <= 15);
+					
 				case 'telefone':
-					return 'O campo "telefone" deve ser preenchido apenas com números e ter entre 9 e 20 caracteres. Por favor, tente novamente.'
-					break;
-				
+					return (is_numeric($attrValue) && $tam >=9 && $tam <= 20);
+					
 				case 'estado':
 				case 'cidade':
 				case 'bairro':
-					return 'O campo "'.$attrName.'" é de preenchimento obrigatório e deve ter no máximo 20 caracteres. Por favor, tente novamente.'
-					break;
+					return ($tam <= 20 && $tam > 0);
 								
 				case 'rua':
-					return 'O campo "'.$attrName.'" é de preenchimento obrigatório e deve ter no máximo 100 caracteres. Por favor, tente novamente.'
-					break;
-
+					return ($tam <= 100 && $tam > 0);
+					
 				case 'complemento':
-					return 'O campo "'.$attrName.'" deve ter no máximo 300 caracteres. Por favor, tente novamente.'
-					break;
-			}
-		}
-
-		private function validaCampo($attrName, $attrValue){
-			switch ($attrName) {
-				case 'nome':
-					return strlen($attrValue) > 0;
-					break;
-				
-				case 'cpf_cod':
-					return strlen($attrValue <= 15);
-					break;
-				
-				case 'telefone':
-					$attrValue = print_r($attrValue, true);
-					$tam = strlen($attrValue);
-					return is_numeric($attrValue) && $tam >=9 && $tam <= 20;
-					break;
-				
-				case 'estado':
-				case 'cidade':
-				case 'bairro':
-					$tam = strlen($attrValue);
-					return tam <= 20 && tam > 0;
-					break;
-								
-				case 'rua':
-					$tam = strlen($attrValue);
-					return tam <= 100 && tam > 0;
-					break;
-
-				case 'complemento':
-					$tam = strlen($attrValue);
-					return tam <= 300;
-					break;
-
+					return ($tam <= 300);
+					
 				case 'senha':
-					return strlen($attrValue) == 32;
-					break;
+					return ($tam == 32);
+			}
+		}
+
+		private static function errorMsg($attrName){
+			switch ($attrName) {
+				case 'nome':
+					return 'O campo "Nome" é obrigatório. Por favor, tente novamente.';
+					
+				case 'cpf_cod':
+					return 'O campo "CPF/Cod" é obrigatório e deve ser preenchido com no máximo 15 caracteres. Por favor, tente novamente.';
+					
+				case 'telefone':
+					return 'O campo "telefone" deve ser preenchido apenas com números e ter entre 9 e 20 caracteres. Por favor, tente novamente.';
+					
+				case 'estado':
+				case 'cidade':
+				case 'bairro':
+					return 'O campo "'.$attrName.'" é de preenchimento obrigatório e deve ter no máximo 20 caracteres. Por favor, tente novamente.';
+								
+				case 'rua':
+					return 'O campo "'.$attrName.'" é de preenchimento obrigatório e deve ter no máximo 100 caracteres. Por favor, tente novamente.';
+					
+				case 'complemento':
+					return 'O campo "'.$attrName.'" deve ter no máximo 300 caracteres. Por favor, tente novamente.';
+				case 'senha':
+					return "ERROR: Erro no campo senha.";
+				default:
+					return "Erro de validação.";
+
 			}
 		}
 	}
