@@ -13,11 +13,18 @@
 		private $user;
 		private $senha;
 
-		public function get(/*string*/ attrName){
+		private $attr = array("name", "cpf_cod", "telefone", "rua", "bairro", "complemento", "user", "senha");
+		
+		public function __construct(/*name, cpf_cod, telefone, rua, bairro, complemento, user, senha*/){
+			$args = func_get_args();
+			$numArgs = func_num_args();
+		}
+
+		public function get(/*string*/ $attrName){
 			return $this->$attrName;
 		}
 
-		public function set(attrName, attrValue){
+		public function set($attrName, $attrValue){
 			$this->$attrName = $attrValue;
 		}
 	}
