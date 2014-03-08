@@ -29,6 +29,9 @@ class FDB {
 
   public function execSql($sql, $values)
   {
+    if(count($args)==1)
+      $values = array();
+    
     try {
       $sth = $db->prepare($sql);
       $sth->execute($values);
@@ -42,7 +45,7 @@ class FDB {
     } catch(PDOException $ex) {
 
       throw new Exception($ex->getMessage());
-      
+
     }
 
   }
