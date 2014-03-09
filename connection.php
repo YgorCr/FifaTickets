@@ -28,6 +28,7 @@ class FDB {
 
   public function execSql($sql, $values)
   {
+    echo $sql."<br>";
     if(count($args)==1)
       $values = array();
 
