@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 <!-- *******TESTE********* -
 -<?php
 	$comp1 = new Compra(1, 12031994, "Boleto Bancário", 1);
+=======
+<?php
+/*	$comp1 = new Compra(1, 12031994, "Boleto Bancário", 1);
+>>>>>>> 4511392d27b05b656a96317200183c01aaf0b265
 
 	$all = $comp1->get("attr");
 	$comp1->set("data","mudou \o/");
@@ -14,9 +19,8 @@
 	
 	foreach ($all as &$value) {
 		echo $comp1->get($value)."<br>";
-	}
+	}*/
 ?>
-<!-- ******* END TESTE********* -->
 
 <?php
 	class Compra {

@@ -13,7 +13,7 @@
 	}
 
 	foreach ($all as &$value) {
-		echo $comp1->get($value)."<br>";
+		// echo $comp1->get($value)."<br>";
 	}
 ?>
 <!-- ******* END TESTE********* -->
@@ -67,7 +67,7 @@
 
 		private static function validaCampo($attrName, $attrValue){
 			$attrValue = print_r($attrValue, true);
-			$tam = strlen($attrValue);
+			$tam = ( $attrValue ? strlen($attrValue) : 0 );
 
 			switch ($attrName) {
 				case 'id':

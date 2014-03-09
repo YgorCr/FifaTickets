@@ -1,6 +1,5 @@
-<!-- *******TESTE********* --
 <?php
-	$comp1 = new Ingresso(1, 12031994, 1, 1, 1);
+/*	$comp1 = new Ingresso(1, 12031994, 1, 1, 1);
 
 	$all = $comp1->get("attr");
 	$comp1->set("data","mudou \o/");
@@ -13,9 +12,8 @@
 	}
 	foreach ($all as &$value) {
 		echo $comp1->get($value)."<br>";
-	}
+	}*/
 ?>
-<!-- ******* END TESTE********* -->
 
 <?php
 	class Partida {

@@ -1,20 +1,20 @@
 <?php
 
 require_once('config.php');
-require_once('connection.php');
+// require_once('connection.php');
+require_once('class.db.php');
 
+require_once('models/comprador.php');
 require_once('controllers/comprador.controller.php');
 
-$db = new FDB();
+require_once('models/partida.php');
+require_once('controllers/partida.controller.php');
 
-$comprador_ctrl = new CompradorController($db);
+$db = new db("pgsql:dbname=ufpbdb;host=localhost;","postgres","postgres");
 
-$list = $comprador_ctrl->all();
+$ctrl = new CompradorController($db);
 
-for($i=0;$i<count($list);$i++)
-{
-	$comprador = $list[$i];
-	echo $comprador->get('nome').'<br>';
-}
+
+include("views/home.php");
 
 ?>
