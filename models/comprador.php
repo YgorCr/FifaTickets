@@ -1,4 +1,4 @@
-<!-- *******TESTE********* --
+<!-- ******* TESTE ********* --
 <?php
 	$comp1 = new Comprador(1,"ygor", 123456789, 123456789, "PB", "João Pessoa", "dos milagres", "cristo", "do lado da minha vizinha", "12345678901234567890123456789012");
 
@@ -16,7 +16,7 @@
 		// echo $comp1->get($value)."<br>";
 	}
 ?>
-<!-- ******* END TESTE********* -->
+<!-- ******* END TESTE ********* -->
 
 <?php
 	class Comprador {

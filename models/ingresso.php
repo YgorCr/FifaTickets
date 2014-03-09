@@ -1,4 +1,4 @@
-<!-- *******TESTE********* --
+<!-- ******* TESTE ********* --
 <?php
 	$comp1 = new Ingresso(1, 12031994, 1, 1, 1);
 
@@ -15,7 +15,7 @@
 		echo $comp1->get($value)."<br>";
 	}
 ?>
-<!-- ******* END TESTE********* -->
+<!-- ******* END TESTE ********* -->
 
 <?php
 	class Ingresso {
