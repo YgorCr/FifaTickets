@@ -1,17 +1,16 @@
 <!-- *******TESTE********* --
 <?php
-	$comp1 = new Compra(1, 12031994, "Boleto Bancário", 1);
+	$comp1 = new Ingresso(1, 12031994, 1, 1, 1);
 
 	$all = $comp1->get("attr");
 	$comp1->set("data","mudou \o/");
-	
-	$testValidation = array(1, 1, 1, 1);
-	$errorValues = array(null, null, null, null);
-	$rightValues = array(1, 12031994, "Boleto Bancário", 1);
+
+	$testValidation = array(1, 1, 1, 1, 1);
+	$errorValues = array(null, null, null, null, null);
+	$rightValues = array(1, 12031994, 1, 1, 1);
 	foreach ($all as $key => $names) {
 		$comp1->set($names, $testValidation[$key] ? ($errorValues[$key]) : ($rightValues[$key]) );
 	}
-	
 	foreach ($all as &$value) {
 		echo $comp1->get($value)."<br>";
 	}
@@ -19,28 +18,29 @@
 <!-- ******* END TESTE********* -->
 
 <?php
-	class Compra {
+	class Ingresso {
 		private $id;
 		private $data;
-		private $forma_de_pagamento;
-		private $comprador_id;
+		private $ingresso_classe_id;
+		private $partida_id;
+		private $compra_id;
 
-		private $attr = array("id", "data", "forma_de_pagamento", "comprador_id");
+		private $attr = array("id", "data", "ingresso_classe_id", "partida_id", "compra_id");
 		
 		public function __construct($id ,$data, $forma_de_pagamento, $comprador_id){
 			$args = func_get_args();
 			$numArgs = func_num_args();
 
-			if($numArgs != 4){
+			if($numArgs != 5){
 				echo "ERROR: Verifique se está passando todos os parametros corretamente.";
 			}
 			else{
 				foreach ($this->attr as $key => $attrName) {
-					if(Compra::validaCampo($attrName, $args[$key])){
+					if(Ingresso::validaCampo($attrName, $args[$key])){
 						$this->$attrName = $args[$key];
 					}
 					else{
-						throw new Exception(Compra::errorMsg($attrName), 1);
+						throw new Exception(Ingresso::errorMsg($attrName), 1);
 					}
 				}
 			}
@@ -51,11 +51,11 @@
 		}
 
 		public function set($attrName, $attrValue){
-			if(Compra::validaCampo($attrName, $attrValue)){
+			if(Ingresso::validaCampo($attrName, $attrValue)){
 				$this->$attrName = $attrValue;
 			}
 			else{
-				throw new Exception(Compra::errorMsg($attrName), 1);
+				throw new Exception(Ingresso::errorMsg($attrName), 1);
 			}
 		}
 
@@ -67,7 +67,13 @@
 				case 'id':
 					return (is_numeric($attrValue));
 
-				case 'comprador_id':
+				case 'ingresso_classe_id':
+					return (is_numeric($attrValue));
+
+				case 'partida_id':
+					return (is_numeric($attrValue));
+
+				case 'compra_id':
 					return (is_numeric($attrValue));
 			}
 		}
@@ -77,9 +83,6 @@
 				case 'data':
 					return 'O campo "'.$attrName.'" é obrigatório. Por favor, tente novamente.';
 
-				case 'forma_de_pagamento':
-					return 'O campo "'.$attrName.'" é obrigatório. Por favor, tente novamente.';
-				
 				default:
 					return "Erro de validação. Atributo com erro: ".$attrName;
 

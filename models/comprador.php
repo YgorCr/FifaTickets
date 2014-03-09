@@ -5,6 +5,13 @@
 	$all = $comp1->get("attr");
 	$comp1->set("nome","mudou \o/");
 
+	$testValidation = array(0, 0, 0, 0, 0, 0, 0, 0, 1, 0);
+	$errorValues = array(null, null, null, null, null, null, null, null, null, null);
+	$rightValues = array(1,"ygor", 123456789, 123456789, "PB", "João Pessoa", "dos milagres", "cristo", "do lado da minha vizinha", "12345678901234567890123456789012");
+	foreach ($all as $key => $names) {
+		$comp1->set($names, $testValidation[$key] ? ($errorValues[$key]) : ($rightValues[$key]) );
+	}
+
 	foreach ($all as &$value) {
 		echo $comp1->get($value)."<br>";
 	}
@@ -65,14 +72,15 @@
 			switch ($attrName) {
 				case 'id':
 					return (is_numeric($attrValue));
+
 				case 'nome':
 					return ($tam > 0);
 					
 				case 'cpf_cod':
-					return ($tam <= 15);
+					return ($tam <= 15 && $tam > 0);
 					
 				case 'telefone':
-					return (is_numeric($attrValue) && ($tam >=9 && $tam <= 20));
+					return (is_numeric($attrValue) && ($tam >= 9 && $tam <= 20));
 					
 				case 'estado':
 				case 'cidade':
@@ -111,8 +119,7 @@
 					
 				case 'complemento':
 					return 'O campo "'.$attrName.'" deve ter no máximo 300 caracteres. Por favor, tente novamente.';
-				case 'senha':
-					return "ERROR: Erro no campo senha.";
+
 				default:
 					return "Erro de validação. Atributo com erro: ".$attrName;
 
