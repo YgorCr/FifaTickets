@@ -67,6 +67,10 @@
 				case 'id':
 					return (is_numeric($attrValue));
 
+				case 'data':			
+					list ($ano, $mes, $dia) = split ('[/.-]', $attrValue);
+					return checkdate($mes, $dia, $ano);
+
 				case 'ingresso_classe_id':
 					return (is_numeric($attrValue));
 
@@ -75,11 +79,20 @@
 
 				case 'compra_id':
 					return (is_numeric($attrValue));
+					
+				case 'attr':
+					return false;
+
+				default:
+					throw new Exception("O atributo ".$attrName." não pertence a esta classe. Atributo desconhecido!", 1);
 			}
 		}
 
 		private static function errorMsg($attrName){
 			switch ($attrName) {
+				case 'attr':
+					return 'O atributo attr não deve ser modificado. Somente leitura!'
+
 				case 'data':
 					return 'O campo "'.$attrName.'" é obrigatório. Por favor, tente novamente.';
 

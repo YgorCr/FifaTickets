@@ -5,7 +5,7 @@
 	$all = $comp1->get("attr");
 	$comp1->set("nome","mudou \o/");
 
-	$testValidation = array(0, 0, 0, 0, 0, 0, 0, 0, 1, 0);
+	$testValidation = array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
 	$errorValues = array(null, null, null, null, null, null, null, null, null, null);
 	$rightValues = array(1,"ygor", 123456789, 123456789, "PB", "João Pessoa", "dos milagres", "cristo", "do lado da minha vizinha", "12345678901234567890123456789012");
 	foreach ($all as $key => $names) {
@@ -95,11 +95,20 @@
 					
 				case 'senha':
 					return ($tam == 32);
+
+				case 'attr':
+					return false;
+
+				default:
+					throw new Exception("O atributo ".$attrName." não pertence a esta classe. Atributo desconhecido!", 1);
 			}
 		}
 
 		private static function errorMsg($attrName){
 			switch ($attrName) {
+				case 'attr':
+					return 'O atributo attr não deve ser modificado. Somente leitura!'
+
 				case 'nome':
 					return 'O campo "Nome" é obrigatório. Por favor, tente novamente.';
 					

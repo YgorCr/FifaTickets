@@ -1,5 +1,5 @@
-<!-- *******TESTE********* --
-<?php
+<!-- *******TESTE********* -
+-<?php
 	$comp1 = new Compra(1, 12031994, "Boleto Bancário", 1);
 
 	$all = $comp1->get("attr");
@@ -67,19 +67,33 @@
 				case 'id':
 					return (is_numeric($attrValue));
 
+				case 'data':			
+					list ($ano, $mes, $dia) = split ('[/.-]', $attrValue);
+					return checkdate($mes, $dia, $ano);
+
+				case 'forma_de_pagamento':
+					return $attrValue == '0' || $attrValue == '1';
+
 				case 'comprador_id':
 					return (is_numeric($attrValue));
+					
+				case 'attr':
+					return false;
+
+				default:
+					throw new Exception("O atributo ".$attrName." não pertence a esta classe. Atributo desconhecido!", 1);
 			}
 		}
 
 		private static function errorMsg($attrName){
 			switch ($attrName) {
-				case 'data':
-					return 'O campo "'.$attrName.'" é obrigatório. Por favor, tente novamente.';
+				case 'attr':
+					return 'O atributo attr não deve ser modificado. Somente leitura!'
 
+				case 'data':
 				case 'forma_de_pagamento':
 					return 'O campo "'.$attrName.'" é obrigatório. Por favor, tente novamente.';
-				
+
 				default:
 					return "Erro de validação. Atributo com erro: ".$attrName;
 

@@ -1,16 +1,17 @@
 <!-- *******TESTE********* --
 <?php
-	$comp1 = new Ingresso(1, 12031994, 1, 1, 1);
+	$comp1 = new Comprador(1,"ygor", 123456789, 123456789, "PB", "João Pessoa", "dos milagres", "cristo", "do lado da minha vizinha", "12345678901234567890123456789012");
 
 	$all = $comp1->get("attr");
-	$comp1->set("data","mudou \o/");
+	$comp1->set("nome","mudou \o/");
 
-	$testValidation = array(1, 1, 1, 1, 1);
-	$errorValues = array(null, null, null, null, null);
-	$rightValues = array(1, 12031994, 1, 1, 1);
+	$testValidation = array(0, 0, 0, 0, 0, 0, 0, 0, 1, 0);
+	$errorValues = array(null, null, null, null, null, null, null, null, null, null);
+	$rightValues = array(1,"ygor", 123456789, 123456789, "PB", "João Pessoa", "dos milagres", "cristo", "do lado da minha vizinha", "12345678901234567890123456789012");
 	foreach ($all as $key => $names) {
 		$comp1->set($names, $testValidation[$key] ? ($errorValues[$key]) : ($rightValues[$key]) );
 	}
+
 	foreach ($all as &$value) {
 		echo $comp1->get($value)."<br>";
 	}
@@ -18,16 +19,16 @@
 <!-- ******* END TESTE********* -->
 
 <?php
-	class Partida {
+	class IngressosClasses {
 		private $id;
 		private $nome;
-		private $data;
-		private $tipo;
-		private $local_id;
+		private $total;
+		private $vendidos;
+		private $valor;
 
-		private $attr = array("id", "nome", "data", "tipo", "local_id");
+		private $attr = array("id", "nome", "total", "vendidos", "valor");
 		
-		public function __construct($id ,$data, $forma_de_pagamento, $comprador_id){
+		public function __construct($id, $nome, $total, $vendidos, $valor){
 			$args = func_get_args();
 			$numArgs = func_num_args();
 
@@ -36,11 +37,11 @@
 			}
 			else{
 				foreach ($this->attr as $key => $attrName) {
-					if(Partida::validaCampo($attrName, $args[$key])){
+					if(IngressosClasses::validaCampo($attrName, $args[$key])){
 						$this->$attrName = $args[$key];
 					}
 					else{
-						throw new Exception(Partida::errorMsg($attrName), 1);
+						throw new Exception(IngressosClasses::errorMsg($attrName), 1);
 					}
 				}
 			}
@@ -51,11 +52,11 @@
 		}
 
 		public function set($attrName, $attrValue){
-			if(Partida::validaCampo($attrName, $attrValue)){
+			if(IngressosClasses::validaCampo($attrName, $attrValue)){
 				$this->$attrName = $attrValue;
 			}
 			else{
-				throw new Exception(Partida::errorMsg($attrName), 1);
+				throw new Exception(IngressosClasses::errorMsg($attrName), 1);
 			}
 		}
 
@@ -67,24 +68,24 @@
 				case 'id':
 					return (is_numeric($attrValue));
 
-				case 'data':			
-					list ($ano, $mes, $dia) = split ('[/.-]', $attrValue);
-					return checkdate($mes, $dia, $ano);
-
 				case 'nome':
-					return ($tam <= 100 && $tam > 0);
-
-				case 'tipo':
-					return ($tam <= 10 && $tam > 0);
-
-				case 'local_id':
-					return (is_numeric($attrValue));
+					return ($tam > 0 && $tam <= 30);
 					
+				case 'total':
+					return ((int)$attrValue) >= 0;
+				
+				case 'vendidos':
+					return ((int)$attrValue) >= 0 && ((int)$attrValue) <= $this->total;			
+
+				case 'valor':
+					return ((int)$attrValue) >= 0;
+
 				case 'attr':
 					return false;
 
 				default:
 					throw new Exception("O atributo ".$attrName." não pertence a esta classe. Atributo desconhecido!", 1);
+					
 			}
 		}
 
@@ -93,10 +94,13 @@
 				case 'attr':
 					return 'O atributo attr não deve ser modificado. Somente leitura!'
 
-				case 'data':
 				case 'nome':
-				case 'tipo':
-					return 'O campo "'.$attrName.'" é obrigatório. Por favor, tente novamente.';
+					return 'O campo "Nome" é obrigatório. Por favor, tente novamente.';
+				
+				case 'total':
+				case 'vendidos':
+				case 'valor'
+					return 'Valor inválido para o campo "'.$attrName.'".'
 
 				default:
 					return "Erro de validação. Atributo com erro: ".$attrName;
