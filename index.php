@@ -11,9 +11,6 @@ $db = new db("pgsql:dbname=ufpbdb;host=localhost;","postgres","postgres");
 
 $ctrl = new CompradorController($db);
 
-$list = $ctrl->all();
-
-print_r($list);
 
 include("views/home.php");
 
