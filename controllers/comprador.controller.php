@@ -9,7 +9,17 @@
 		public function all()
 		{
 
-			$compradores = $this->db->select("comprador");
+			$res = $this->db->select("comprador");
+
+			$compradores = array();
+
+			foreach ($res as $arr) {
+				$comp = new Comprador();
+				foreach ($arr as $key => $value) {
+					$comp->set($key, $value);
+					$compradores[] = $comp;
+				}
+			}
 
 			return $compradores;
 

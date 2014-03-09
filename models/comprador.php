@@ -6,7 +6,7 @@
 	$comp1->set("nome","mudou \o/");
 
 	foreach ($all as &$value) {
-		echo $comp1->get($value)."<br>";
+		// echo $comp1->get($value)."<br>";
 	}
 ?>
 <!-- ******* END TESTE********* -->
