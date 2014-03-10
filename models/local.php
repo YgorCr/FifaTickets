@@ -30,6 +30,20 @@
 
 		private $attr = array("id", "nome", "estado", "cidade", "rua", "bairro", "capacidade");
 		
+		public function __construct(){
+			$args = func_get_args();
+			$numArgs = func_num_args();
+
+			foreach ($this->attr as $key => $attrName) {
+				if(Comprador::validaCampo($attrName, $args[$key])){
+					$this->$attrName = $args[$key];
+				}
+				else{
+					throw new Exception(Comprador::errorMsg($attrName), 1);
+				}
+			}
+		}
+		
 		public function __construct($id, $nome, $estado, $cidade, $rua, $bairro, $capacidade){
 			$args = func_get_args();
 			$numArgs = func_num_args();
