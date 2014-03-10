@@ -80,6 +80,10 @@
 
 		}
 
+		public function delete($partida){
+			return $this->db->delete('partida', "id='".$partida->get("id")."'");
+
+		}
 	}
 
 

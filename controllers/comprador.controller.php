@@ -76,9 +76,12 @@
 
 			return $this->db->update('comprador', $insert, "id='".$comprador->get("id")."'");
 
-
 		}
 
+		public function delete($comprador){
+			return $this->db->delete('comprador', "id='".$comprador->get("id")."'");
+
+		}
 	}
 
 ?>
