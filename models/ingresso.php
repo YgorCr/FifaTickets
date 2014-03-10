@@ -64,7 +64,7 @@
 
 			switch ($attrName) {
 				case 'id':
-					return (is_numeric($attrValue));
+					return (is_numeric($attrValue)) || $tam == 0;
 
 				case 'data':			
 					list ($ano, $mes, $dia) = split ('[/.-]', $attrValue);
