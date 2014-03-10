@@ -18,8 +18,8 @@
 				$part = new Partida();
 				foreach ($arr as $key => $value) {
 					$part->set($key, $value);
-					$partidas[] = $part;
 				}
+				$partidas[] = $part;
 			}
 
 			return $partidas;
@@ -36,8 +36,8 @@
 				$part = new Partida();
 				foreach ($arr as $key => $value) {
 					$part->set($key, $value);
-					$partidas[] = $part;
 				}
+				$partidas[] = $part;
 			}
 
 			return $partidas[0];

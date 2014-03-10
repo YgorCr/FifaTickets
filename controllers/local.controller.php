@@ -16,8 +16,8 @@
 				$loc = new Local();
 				foreach ($arr as $key => $value) {
 					$loc->set($key, $value);
-					$locais[] = $loc;
 				}
+				$locais[] = $loc;
 			}
 
 			return $locais;
@@ -32,8 +32,8 @@
 				$loc = new Local();
 				foreach ($arr as $key => $value) {
 					$loc->set($key, $value);
-					$locais[] = $loc;
 				}
+				$locais[] = $loc;
 			}
 			return $locais[0];
 		}

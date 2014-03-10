@@ -17,8 +17,8 @@
 				$comp = new Comprador();
 				foreach ($arr as $key => $value) {
 					$comp->set($key, $value);
-					$compradores[] = $comp;
 				}
+				$compradores[] = $comp;
 			}
 
 			return $compradores;
@@ -35,8 +35,8 @@
 				$comp = new Comprador();
 				foreach ($arr as $key => $value) {
 					$comp->set($key, $value);
-					$compradores[] = $comp;
 				}
+				$compradores[] = $comp;
 			}
 
 			return $compradores[0];

@@ -18,8 +18,8 @@
 				$ingresso = new Ingresso();
 				foreach ($arr as $key => $value) {
 					$ingresso->set($key, $value);
-					$ingressos[] = $ingresso;
 				}
+				$ingressos[] = $ingresso;
 			}
 
 			return $ingressos;
@@ -36,8 +36,8 @@
 				$ingresso = new Ingresso();
 				foreach ($arr as $key => $value) {
 					$ingresso->set($key, $value);
-					$ingressos[] = $ingresso;
 				}
+				$ingressos[] = $ingresso;
 			}
 
 			return $ingressos[0];
