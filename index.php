@@ -4,6 +4,9 @@ require_once('config.php');
 // require_once('connection.php');
 require_once('class.db.php');
 
+require_once('models/compra.php');
+require_once('controllers/compra.controller.php');
+
 // require_once('models/comprador.php');
 // require_once('controllers/comprador.controller.php');
 
@@ -18,6 +21,14 @@ require_once('class.db.php');
 
 $db = new db("pgsql:dbname=ufpbdb;host=localhost;","postgres","postgres");
 
+$compra = new Compra();
+$compra->set("id", 7);
+$compra->set("data", "92/11/92");
+$compra->set("forma_de_pagamento", 0);
+$compra->set("comprador_id", 5);
+
+$ctr0 = new CompraController($db);
+$ctr0->create($compra);
 
 // $ctrl = new CompradorController($db);
 // $ctr2 = new PartidaController($db);

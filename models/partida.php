@@ -32,11 +32,11 @@
 			$numArgs = func_num_args();
 
 			foreach ($this->attr as $key => $attrName) {
-				if(Comprador::validaCampo($attrName, $args[$key])){
+				if(Partida::validaCampo($attrName, $args[$key])){
 					$this->$attrName = $args[$key];
 				}
 				else{
-					throw new Exception(Comprador::errorMsg($attrName), 1);
+					throw new Exception(Partida::errorMsg($attrName), 1);
 				}
 			}
 		}
