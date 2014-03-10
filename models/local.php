@@ -13,7 +13,7 @@
 	}
 
 	foreach ($all as &$value) {
-		// echo $loc1->get($value)."<br>";
+		echo $loc1->get($value)."<br>";
 	}
 	/******* END TESTE *********/
 ?>
@@ -82,7 +82,7 @@
 					return ($tam <= 100 && $tam > 0);
 
 				case 'capacidade':
-					return ((int)$attrValue) >= 0;
+					return (is_numeric($attrValue)) && ((int)$attrValue) >= 0;
 
 				case 'attr':
 					return false;
