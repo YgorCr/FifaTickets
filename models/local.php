@@ -3,7 +3,7 @@
 	/******* TESTE *********/
 	$loc1 = new Local(1,"Ronaldão", "dos bobos", "Cristo", 10000, "João Pessoa");
 
-	$all = $loc->get("attr");
+	$all = $loc1->get("attr");
 	$loc1->set("nome","mudou \o/");
 
 	$testValidation = array(1, 1, 1, 1, 1, 1);
@@ -97,7 +97,7 @@
 		private static function errorMsg($attrName){
 			switch ($attrName) {
 				case 'attr':
-					return 'O atributo attr não deve ser modificado. Somente leitura!'
+					return 'O atributo attr não deve ser modificado. Somente leitura!';
 
 				case 'nome':
 					return 'O campo "Nome" é obrigatório. Por favor, tente novamente.';

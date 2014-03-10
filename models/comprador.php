@@ -108,7 +108,7 @@
 		private static function errorMsg($attrName){
 			switch ($attrName) {
 				case 'attr':
-					return 'O atributo attr não deve ser modificado. Somente leitura!'
+					return 'O atributo attr não deve ser modificado. Somente leitura!';
 
 				case 'nome':
 					return 'O campo "Nome" é obrigatório. Por favor, tente novamente.';
