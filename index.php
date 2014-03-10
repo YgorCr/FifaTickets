@@ -12,7 +12,7 @@ require_once('controllers/partida.controller.php');
 
 $db = new db("pgsql:dbname=ufpbdb;host=localhost;","postgres","postgres");
 
-$ctrl = new CompradorController($db);
+$ctrl = new PartidaController($db);
 
 
 include("views/home.php");
