@@ -77,7 +77,8 @@
 
 		}
 		
-		return $this->db->update('local', $insert, "id='".$local->get("id")."'");
+		// E isso aqui?
+		// return $this->db->update('local', $insert, "id='".$local->get("id")."'");
 	}
 
 ?>

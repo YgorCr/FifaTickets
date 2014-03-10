@@ -23,8 +23,8 @@ $ctrl = new CompradorController($db);
 $ctr2 = new PartidaController($db);
 $ctr3 = new LocalController($db);
 
-$loc1 = new Local(1,"Ronaldão", "PB", "João Pessoa", "dos bobos", "Cristo", 10000);
-$ctr3->create($loc1);
+$ingCtrl = new IngressoController($db);
+
 
 include("views/home.php");
 
