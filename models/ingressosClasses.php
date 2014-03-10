@@ -92,15 +92,15 @@
 		private static function errorMsg($attrName){
 			switch ($attrName) {
 				case 'attr':
-					return 'O atributo attr não deve ser modificado. Somente leitura!'
+					return 'O atributo attr não deve ser modificado. Somente leitura!';
 
 				case 'nome':
 					return 'O campo "Nome" é obrigatório. Por favor, tente novamente.';
 				
 				case 'total':
 				case 'vendidos':
-				case 'valor'
-					return 'Valor inválido para o campo "'.$attrName.'".'
+				case 'valor':
+					return 'Valor inválido para o campo "'.$attrName.'".';
 
 				default:
 					return "Erro de validação. Atributo com erro: ".$attrName;

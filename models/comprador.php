@@ -1,11 +1,11 @@
-<!-- ******* TESTE ********* --
+<!-- ******* TESTE ********* -->
 <?php
 	$comp1 = new Comprador(1,"ygor", 123456789, 123456789, "PB", "João Pessoa", "dos milagres", "cristo", "do lado da minha vizinha", "12345678901234567890123456789012");
 
 	$all = $comp1->get("attr");
 	$comp1->set("nome","mudou \o/");
 
-	$testValidation = array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+	$testValidation = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 	$errorValues = array(null, null, null, null, null, null, null, null, null, null);
 	$rightValues = array(1,"ygor", 123456789, 123456789, "PB", "João Pessoa", "dos milagres", "cristo", "do lado da minha vizinha", "12345678901234567890123456789012");
 	foreach ($all as $key => $names) {
@@ -13,7 +13,7 @@
 	}
 
 	foreach ($all as &$value) {
-		// echo $comp1->get($value)."<br>";
+		echo $comp1->get($value)."<br>";
 	}
 ?>
 <!-- ******* END TESTE ********* -->
@@ -33,7 +33,7 @@
 
 		private $attr = array("id", "nome", "cpf_cod", "telefone", "estado", "cidade", "rua", "bairro", "complemento", "senha");
 		
-		public function __construct($id, $nome, $cpf_cod, $telefone, $rua, $bairro, $complemento, $user, $senha){
+		public function __construct($id, $nome, $cpf_cod, $telefone, $estado, $cidade, $rua, $bairro, $complemento, $senha){
 			$args = func_get_args();
 			$numArgs = func_num_args();
 
@@ -107,7 +107,7 @@
 		private static function errorMsg($attrName){
 			switch ($attrName) {
 				case 'attr':
-					return 'O atributo attr não deve ser modificado. Somente leitura!'
+					return 'O atributo attr não deve ser modificado. Somente leitura!';
 
 				case 'nome':
 					return 'O campo "Nome" é obrigatório. Por favor, tente novamente.';

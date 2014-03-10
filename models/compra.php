@@ -89,7 +89,7 @@
 		private static function errorMsg($attrName){
 			switch ($attrName) {
 				case 'attr':
-					return 'O atributo attr não deve ser modificado. Somente leitura!'
+					return 'O atributo attr não deve ser modificado. Somente leitura!';
 
 				case 'data':
 				case 'forma_de_pagamento':
