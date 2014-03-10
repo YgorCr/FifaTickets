@@ -1,9 +1,9 @@
-<<<<<<< HEAD
-<!-- ******* TESTE ********* -->
-=======
->>>>>>> 8afb5bfbf658bcfb2da083e5a2951b818aa25c01
 <?php
-/******* TESTE ********* --
+	/******* TESTE *********/
+
+	$teste = print_r(null, true);
+	echo $teste."<br>";
+
 	$comp1 = new Comprador(1,"ygor", 123456789, 123456789, "PB", "João Pessoa", "dos milagres", "cristo", "do lado da minha vizinha", "12345678901234567890123456789012");
 
 	$all = $comp1->get("attr");
@@ -19,8 +19,7 @@
 	foreach ($all as &$value) {
 		echo $comp1->get($value)."<br>";
 	}
-<<<<<<< HEAD
-******* END TESTE *********/
+	/******* END TESTE *********/
 ?>
 
 <?php

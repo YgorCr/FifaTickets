@@ -1,5 +1,5 @@
 <?php
-	/******* TESTE *********/
+	/******* TESTE *********
 	$loc1 = new Local(1,"Ronaldão", "PB", "João Pessoa", "dos bobos", "Cristo", 10000);
 
 	$all = $loc->get("attr");

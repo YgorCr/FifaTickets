@@ -1,5 +1,5 @@
-<!-- ******* TESTE ********* --
 <?php
+	/******* TESTE *********
 	$comp1 = new Ingresso(1, 12031994, 1, 1, 1);
 
 	$all = $comp1->get("attr");
@@ -13,10 +13,9 @@
 	}
 	foreach ($all as &$value) {
 		echo $comp1->get($value)."<br>";
-	}
+	}	
+	/******* END TESTE *********/
 ?>
-<!-- ******* END TESTE ********* -->
-
 <?php
 	class Ingresso {
 		private $id;
