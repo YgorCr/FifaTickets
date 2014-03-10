@@ -35,7 +35,7 @@
 					$locais[] = $loc;
 				}
 			}
-			return $locais;
+			return $locais[0];
 		}
 		
 		public function create($local){

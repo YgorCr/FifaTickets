@@ -1,5 +1,5 @@
 <?php
-	/******* TESTE *********/
+	/******* TESTE *********
 	$loc1 = new Local(1,"Ronaldão", "PB", "João Pessoa", "dos bobos", "Cristo", 10000);
 
 	$all = $loc1->get("attr");
@@ -30,7 +30,7 @@
 
 		private $attr = array("id", "nome", "estado", "cidade", "rua", "bairro", "capacidade");
 		
-		public function __construct($id, $nome, , $estado, $cidade, $rua, $bairro, $capacidade){
+		public function __construct($id, $nome, $estado, $cidade, $rua, $bairro, $capacidade){
 			$args = func_get_args();
 			$numArgs = func_num_args();
 

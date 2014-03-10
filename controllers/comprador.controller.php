@@ -39,7 +39,7 @@
 				}
 			}
 
-			return $compradores;
+			return $compradores[0];
 		}
 
 		public function create($comprador)

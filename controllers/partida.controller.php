@@ -40,7 +40,7 @@
 				}
 			}
 
-			return $partidas;
+			return $partidas[0];
 		}
 
 		public function create($partida)
