@@ -41,6 +41,25 @@ SET default_with_oids = false;
 -- Name: compra; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
+CREATE TABLE ingresso (
+    id integer NOT NULL,
+    data date NOT NULL,
+    ingresso_classe_id integer NOT NULL,
+    partida_id integer NOT NULL,
+    ingressos_classes_id integer NOT NULL,
+    compra_id integer NOT NULL
+);
+
+
+ALTER TABLE public.ingresso OWNER TO postgres;
+
+--
+-- TOC entry 163 (class 1259 OID 16690)
+-- Dependencies: 6
+-- Name: ingressos_classes; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+
 CREATE TABLE compra (
     id integer NOT NULL,
     data date DEFAULT ('now'::text)::date,
@@ -88,24 +107,6 @@ COMMENT ON COLUMN comprador.cidade IS ' ';
 -- Name: ingresso; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
-CREATE TABLE ingresso (
-    id integer NOT NULL,
-    data date NOT NULL,
-    ingresso_classe_id integer NOT NULL,
-    partida_id integer NOT NULL,
-    ingressos_classes_id integer NOT NULL,
-    compra_id integer NOT NULL
-);
-
-
-ALTER TABLE public.ingresso OWNER TO postgres;
-
---
--- TOC entry 163 (class 1259 OID 16690)
--- Dependencies: 6
--- Name: ingressos_classes; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
 CREATE TABLE ingressos_classes (
     id integer NOT NULL,
     nome character varying(30) NOT NULL,
@@ -121,6 +122,23 @@ ALTER TABLE public.ingressos_classes OWNER TO postgres;
 -- TOC entry 161 (class 1259 OID 16673)
 -- Dependencies: 6
 -- Name: local; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE partida (
+    id integer NOT NULL,
+    tipo character varying(10) NOT NULL,
+    data date NOT NULL,
+    local_id integer NOT NULL,
+    nome character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.partida OWNER TO postgres;
+
+--
+-- TOC entry 1952 (class 0 OID 16703)
+-- Dependencies: 165 1954
+-- Data for Name: compra; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 CREATE TABLE local (
@@ -142,87 +160,6 @@ ALTER TABLE public.local OWNER TO postgres;
 -- Name: partida; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
-CREATE TABLE partida (
-    id integer NOT NULL,
-    tipo character varying(10) NOT NULL,
-    data date NOT NULL,
-    local_id integer NOT NULL,
-    nome character varying(100) NOT NULL
-);
-
-
-ALTER TABLE public.partida OWNER TO postgres;
-
---
--- TOC entry 1952 (class 0 OID 16703)
--- Dependencies: 165 1954
--- Data for Name: compra; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY compra (id, data, forma_de_pagamento, comprador_id) FROM stdin;
-1	2013-01-27	2	1
-\.
-
-
---
--- TOC entry 1951 (class 0 OID 16695)
--- Dependencies: 164 1954
--- Data for Name: comprador; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY comprador (id, nome, cpf_cod, rua, complemento, bairro, senha, cidade, telefone, estado) FROM stdin;
-1	Comprador 1	111111111	asdasdçlk	\N	werwer	12345678901234567890123456789011	werwer	1234567891	vd
-8	ygor2	123	dos milagres	do lado da minha vizinha	cristo	12345678901234567890123456789011	João Pessoa	1324567891	PB
-\.
-
-
---
--- TOC entry 1953 (class 0 OID 16716)
--- Dependencies: 166 1954
--- Data for Name: ingresso; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY ingresso (id, data, ingresso_classe_id, partida_id, ingressos_classes_id, compra_id) FROM stdin;
-\.
-
-
---
--- TOC entry 1950 (class 0 OID 16690)
--- Dependencies: 163 1954
--- Data for Name: ingressos_classes; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY ingressos_classes (id, nome, total, vendidos, valor) FROM stdin;
-\.
-
-
---
--- TOC entry 1948 (class 0 OID 16673)
--- Dependencies: 161 1954
--- Data for Name: local; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY local (id, nome, rua, bairro, capacidade) FROM stdin;
-1	estadio tal	asd	asasd	12
-\.
-
-
---
--- TOC entry 1949 (class 0 OID 16678)
--- Dependencies: 162 1954
--- Data for Name: partida; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY partida (id, tipo, data, local_id, nome) FROM stdin;
-1	1	1993-01-27	1	partida1_braXafs
-\.
-
-
---
--- TOC entry 1837 (class 2606 OID 16710)
--- Dependencies: 165 165 1955
--- Name: compra_comprador_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
---
 
 ALTER TABLE ONLY compra
     ADD CONSTRAINT compra_comprador_id_key UNIQUE (comprador_id);
