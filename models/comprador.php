@@ -15,6 +15,7 @@
 	foreach ($all as &$value) {
 		// echo $comp1->get($value)."<br>";
 	}
+<<<<<<< HEAD
 ******* END TESTE *********/
 ?>
 
