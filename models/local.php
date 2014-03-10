@@ -2,7 +2,7 @@
 	/******* TESTE *********
 	$loc1 = new Local(1,"Ronaldão", "PB", "João Pessoa", "dos bobos", "Cristo", 10000);
 
-	$all = $loc->get("attr");
+	$all = $loc1->get("attr");
 	$loc1->set("nome","mudou \o/");
 
 	$testValidation = array(1, 1, 1, 1, 1, 1);
