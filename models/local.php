@@ -1,22 +1,22 @@
-<!-- ******* TESTE ********* --
-<?phpabc
-	$comp1 = new Comprador(1,"ygor", 123456789, 123456789, "PB", "João Pessoa", "dos milagres", "cristo", "do lado da minha vizinha", "12345678901234567890123456789012");
+<?php
+	/******* TESTE *********/
+	$loc1 = new Local(1,"Ronaldão", "PB", "João Pessoa", "dos bobos", "Cristo", 10000);
 
-	$all = $comp1->get("attr");
-	$comp1->set("nome","mudou \o/");
+	$all = $loc->get("attr");
+	$loc1->set("nome","mudou \o/");
 
-	$testValidation = array(0, 0, 0, 0, 0, 0, 0, 0, 1, 0);
-	$errorValues = array(null, null, null, null, null, null, null, null, null, null);
-	$rightValues = array(1,"ygor", 123456789, 123456789, "PB", "João Pessoa", "dos milagres", "cristo", "do lado da minha vizinha", "12345678901234567890123456789012");
+	$testValidation = array(1, 1, 1, 1, 1, 1);
+	$errorValues = array(null, null, null, null, null, null);
+	$rightValues = array(1,"Ronaldão", "dos bobos", "Cristo", 10000, "João Pessoa");
 	foreach ($all as $key => $names) {
-		$comp1->set($names, $testValidation[$key] ? ($errorValues[$key]) : ($rightValues[$key]) );
+		$loc1->set($names, $testValidation[$key] ? ($errorValues[$key]) : ($rightValues[$key]) );
 	}
 
 	foreach ($all as &$value) {
-		echo $comp1->get($value)."<br>";
+		// echo $loc1->get($value)."<br>";
 	}
+	/******* END TESTE *********/
 ?>
-<!-- ******* END TESTE ********* -->
 
 <?php
 	class Local {
