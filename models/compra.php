@@ -1,5 +1,5 @@
-<!-- ******* TESTE ********* --
 <?php
+	/******* TESTE *********
 	$comp1 = new Compra(1, 12031994, "Boleto Bancário", 1);
 
 	$all = $comp1->get("attr");
@@ -15,9 +15,8 @@
 	foreach ($all as &$value) {
 		echo $comp1->get($value)."<br>";
 	}
+	/******* END TESTE *********/
 ?>
-<!-- ******* END TESTE ********* -->
-
 
 <?php
 	class Compra {
@@ -66,7 +65,7 @@
 
 			switch ($attrName) {
 				case 'id':
-					return (is_numeric($attrValue));
+					return (is_numeric($attrValue)) || $tam == 0;
 
 				case 'data':			
 					list ($ano, $mes, $dia) = split ('[/.-]', $attrValue);

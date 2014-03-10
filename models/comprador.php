@@ -1,13 +1,13 @@
 <?php
-/******* TESTE ********* --
+	/******* TESTE *********/
 	$comp1 = new Comprador(1,"ygor", 123456789, 123456789, "PB", "João Pessoa", "dos milagres", "cristo", "do lado da minha vizinha", "12345678901234567890123456789012");
 
 	$all = $comp1->get("attr");
 	$comp1->set("nome","mudou \o/");
 
-	$testValidation = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+	$testValidation = array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
 	$errorValues = array(null, null, null, null, null, null, null, null, null, null);
-	$rightValues = array(1,"ygor", 123456789, 123456789, "PB", "João Pessoa", "dos milagres", "cristo", "do lado da minha vizinha", "12345678901234567890123456789012");
+	$rightValues = array(1, "ygor", 123456789, 123456789, "PB", "João Pessoa", "dos milagres", "cristo", "do lado da minha vizinha", "12345678901234567890123456789012");
 	foreach ($all as $key => $names) {
 		$comp1->set($names, $testValidation[$key] ? ($errorValues[$key]) : ($rightValues[$key]) );
 	}
@@ -15,7 +15,7 @@
 	foreach ($all as &$value) {
 		echo $comp1->get($value)."<br>";
 	}
-******* END TESTE *********/
+	/******* END TESTE *********/
 ?>
 
 <?php
@@ -71,7 +71,7 @@
 
 			switch ($attrName) {
 				case 'id':
-					return (is_numeric($attrValue));
+					return (is_numeric($attrValue)) || $tam == 0;
 
 				case 'nome':
 					return ($tam > 0);

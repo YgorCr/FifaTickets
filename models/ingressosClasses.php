@@ -1,5 +1,5 @@
-<!-- ******* TESTE ********* --
 <?php
+	/******* TESTE *********
 	$comp1 = new Comprador(1,"ygor", 123456789, 123456789, "PB", "João Pessoa", "dos milagres", "cristo", "do lado da minha vizinha", "12345678901234567890123456789012");
 
 	$all = $comp1->get("attr");
@@ -14,9 +14,9 @@
 
 	foreach ($all as &$value) {
 		echo $comp1->get($value)."<br>";
-	}
+	}	
+	/******* END TESTE *********/
 ?>
-<!-- ******* END TESTE ********* -->
 
 <?php
 	class IngressosClasses {
@@ -66,7 +66,7 @@
 
 			switch ($attrName) {
 				case 'id':
-					return (is_numeric($attrValue));
+					return (is_numeric($attrValue)) || $tam == 0;
 
 				case 'nome':
 					return ($tam > 0 && $tam <= 30);
