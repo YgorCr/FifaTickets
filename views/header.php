@@ -36,13 +36,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">FifaTickets</a>
+          <a class="navbar-brand" href="/">FifaTickets</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Partidas</a></li>
-            <li><a href="#me">Meu cadastro</a></li>
-            <li><a href="#about">Sobre</a></li>
+            <li class="active"><a href="?a=home">Partidas</a></li>
+            <li><a href="?a=comprador">Meu cadastro</a></li>
+            <li><a href="?a=sobre">Sobre</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

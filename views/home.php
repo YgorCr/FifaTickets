@@ -21,21 +21,22 @@
 		<th>Tipo</th>
 		<th>Data</th>
 		<th>Local</th>
-		<th></th>
+		<th><th>
 	</tr>
 
 	<?php
 		foreach ($partidas as $key => $partida) {
 			$local = $localCtr->byId($partida->get("local_id"));
-			$color = ($key%2)?("#FF0000"):("#00FF00");
+			$class = ($key%2)?("success"):("");
 	?>
-			<tr bgcolor = <?php echo $color; ?> >
+			<tr class = "<?php echo $class; ?>" >
 				<td><?php echo $partida->get("id"); ?></td>
 				<td><?php echo $partida->get("nome"); ?></td>
 				<td><?php echo $partida->get("tipo"); ?></td>
 				<td><?php echo $partida->get("data"); ?></td>
 				<td><?php echo $local->get("nome"); ?></td>
-				<td><a href="?a=partida&id=<?php echo $partida->get("id") ?>"> <button type="button" class="btn btn-default btn-sm">
+				<td><a href="?a=partida&id=<?php echo $partida->get("id") ?>"> <button type="button" class="btn btn-default btn-sm
+					">
   <span class="glyphicon glyphicon-info-sign"></span> Ver </button> </a></td>
 			</tr>
 

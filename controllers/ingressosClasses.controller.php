@@ -40,6 +40,29 @@
 			return $ingressosClass[0];
 		}
 
+		public function byPartida($partida)
+		{
+			return $this->byPartidaId($partida->get("id"));
+		}
+
+		public function byPartidaId($partida_id)
+		{
+			$res = $this->db->select($this->table, "partida_id='".$partida_id."'");
+
+			$ingressosClass = array();
+
+			foreach ($res as $arr) {
+				$ingressoClass = new IngressosClasses();
+				foreach ($arr as $key => $value) {
+					$ingressoClass->set($key, $value);
+				}
+				$ingressosClass[] = $ingressoClass;
+			}
+
+			return $ingressosClass;
+
+		}
+
 		public function create($ingressoClass){
 			$all = $ingressoClass->get("attr");
 			$values = array();
