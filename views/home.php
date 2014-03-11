@@ -21,6 +21,7 @@
 		<th>Tipo</th>
 		<th>Data</th>
 		<th>Local</th>
+		<th></th>
 	</tr>
 
 	<?php
@@ -34,7 +35,8 @@
 				<td><?php echo $partida->get("tipo"); ?></td>
 				<td><?php echo $partida->get("data"); ?></td>
 				<td><?php echo $local->get("nome"); ?></td>
-				<td><a href="?a=partida&id=<?php echo $partida->get("id") ?>">Ver</a></td>
+				<td><a href="?a=partida&id=<?php echo $partida->get("id") ?>"> <button type="button" class="btn btn-default btn-sm">
+  <span class="glyphicon glyphicon-info-sign"></span> Ver </button> </a></td>
 			</tr>
 
 	<?php
