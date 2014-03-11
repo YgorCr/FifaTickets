@@ -29,7 +29,7 @@
 
 		private $attr = array("id", "nome", "total", "vendidos", "valor", "partida_id");
 		
-		public function __construct($id, $nome, $total, $vendidos, $valor, $partida_id){
+		public function __construct(/* $id, $nome, $total, $vendidos, $valor, $partida_id */){
 			$args = func_get_args();
 			$numArgs = func_num_args();
 

@@ -1,9 +1,16 @@
-<?php
+<script>
+	function formatar(mascara, documento){
+		var i = documento.value.length;
+		var saida = mascara.substring(0,1);
+		var texto = mascara.substring(i)
 
-	// arquivo comum para o cabeçalho das páginas
-	include("header.php");
-
-?>
+		if(i == 2){
+			documento.value += " ";
+		}else if (texto.substring(0,1) != saida){
+			documento.value += texto.substring(0,1);
+		}
+	}
+</script>
 
 <!--
 	private $id;
@@ -18,11 +25,72 @@
 	private $senha;
 -->
 
+<?php
+
+	if(isset($_SESSION["comprador_id"]))
+	{
+		header("index.php");
+	}
+
+	$ERROR = "";
+
+	if( !strlen($_POST["nome"])   || !strlen($_POST["cpf_cod"]) || !strlen($_POST["telefone"]) ||
+		!strlen($_POST["estado"]) || !strlen($_POST["cidade"] ) || !strlen($_POST["rua"])      || 
+		!strlen($_POST["bairro"]) || !strlen($_POST["senha"]  ))
+	{
+		$ERROR = '<div class="panel panel-default">
+					<div class="panel-body" style = "background-color: #DDDDCC" ><font color="red">';
+		foreach ($_POST as $key => $value) {
+			if(!strlen($_POST[$key])){
+				$ERROR = $ERROR.'O campo '.$key.' é obrigatório. Por favor, tente novamente.<br>';
+			}
+		}
+		$ERROR = $ERROR.'</font></div></div>';
+	}
+
+	/* *
+	foreach ($_POST as $key => $value)
+	{
+		echo $key." = '".$value."' length = ".strlen($value)."<br>";		
+	}
+	/* */
+
+	$compradorCtrl = new CompradorController($db);
+	$novoComprador = new Comprador();
+	foreach ($_POST as $key => $value) {
+		$novoComprador->set($key, $value);
+	}
+
+	$sql = 'select max(id) from comprador';
+	$id = $compradorCtrl->run($sql);
+	//$id = $id[0];
+	echo $id."<br>";
+	//$novoComprador->set("id", );
+
+	$compradorCtrl->create($novoComprador);
+
+	foreach ($_POST as $key => $value) {
+		echo $novoComprador->get($key)."<br>";
+	}
+?>
+
+<?php
+
+	// arquivo comum para o cabeçalho das páginas
+	include("header.php");
+
+?>
+
 <div class="panel panel-default">
 	<div class="panel-heading"><font size="5"><strong>Cadastro de usuários</strong></font></div>
 	<div class="panel-body">
-		<form>
-			O campos marcados com <span style="color:red">*</span> são obrigatórios!<br><br>
+		<form method = "post" action="index.php?a=comprador">
+			<?php
+				if(strlen($ERROR)){
+					echo $ERROR;
+				}
+			?>
+			O campos marcados com <span style="color:red">*</span> são obrigatórios!<br>
 			<table>
 				<tr>
 					<td class="tdlabel">Nome<span style="color:red">*</span>: </td>
@@ -34,40 +102,40 @@
 				</tr>
 				<tr>
 					<td class="tdlabel">Telefone<span style="color:red">*</span>: </td>
-					<td class="tdform"><input type="text" name="telefone" class="form-control"></td>
+					<td class="tdform"><input type="text" maxlength="12" name="telefone" class="form-control" OnKeyPress="formatar('## ####-####', this)"></td>
 				</tr>
 				<tr>
 					<td class="tdlabel">Estado<span style="color:red">*</span>: </td>
 					<td class="tdform">
-						<select class="form-control">
+						<select class="form-control" name="estado">
 						  <option value="0">Selecione seu Estado</option>
-						  <option value="1">AC</option>
-						  <option value="2">AL</option>
-						  <option value="3">AP</option>
-						  <option value="4">AM</option>
-						  <option value="5">BA</option>
-						  <option value="6">CE</option>
-						  <option value="7">DF</option>
-						  <option value="8">ES</option>
-						  <option value="9">GO</option>
-						  <option value="10">MA</option>
-						  <option value="11">MT</option>
-						  <option value="12">MS</option>
-						  <option value="13">MG</option>
-						  <option value="14">PA</option>
-						  <option value="15">PB</option>
-						  <option value="16">PR</option>
-						  <option value="17">PE</option>
-						  <option value="18">PI</option>
-						  <option value="19">RJ</option>
-						  <option value="20">RN</option>
-						  <option value="21">RS</option>
-						  <option value="22">RO</option>
-						  <option value="23">RR</option>
-						  <option value="24">SC</option>
-						  <option value="25">SP</option>
-						  <option value="26">SE</option>
-						  <option value="27">TO</option>
+						  <option value="AC">AC</option>
+						  <option value="AL">AL</option>
+						  <option value="AP">AP</option>
+						  <option value="AM">AM</option>
+						  <option value="BA">BA</option>
+						  <option value="CE">CE</option>
+						  <option value="DF">DF</option>
+						  <option value="ES">ES</option>
+						  <option value="GO">GO</option>
+						  <option value="MA">MA</option>
+						  <option value="MT">MT</option>
+						  <option value="MS">MS</option>
+						  <option value="MG">MG</option>
+						  <option value="PA">PA</option>
+						  <option value="PB">PB</option>
+						  <option value="PR">PR</option>
+						  <option value="PE">PE</option>
+						  <option value="PI">PI</option>
+						  <option value="RJ">RJ</option>
+						  <option value="RN">RN</option>
+						  <option value="RS">RS</option>
+						  <option value="RO">RO</option>
+						  <option value="RR">RR</option>
+						  <option value="SC">SC</option>
+						  <option value="SP">SP</option>
+						  <option value="SE">SE</option>
+						  <option value="TO">TO</option>
 						</select></td>
 				</tr>
 				<tr>
@@ -91,8 +159,10 @@
 					<td class="tdform"><input type="password" name="senha" class="form-control"></td>
 				</tr>
 			</table>
-			<div>
-				<center><input type="submit" value="Enviar"></center>
+			<br>
+			<div class="btn-group" style="margin-left: 78px">
+			  <button type="button" class="btn btn-default">Cancelar</button>
+			  <button type="submit" class="btn btn-default">Enviar</button>
 			</div>
 		</form>
 	</div>
