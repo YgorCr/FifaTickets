@@ -16,6 +16,8 @@
 
 <div id="header">
 
-	FifaTickets
+	<center>
+		<img src="static/images/logo.jpg">
+	</center>
 
 </div>
