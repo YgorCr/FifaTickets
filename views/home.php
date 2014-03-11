@@ -10,8 +10,7 @@
 	$ptCtr = new PartidaController($db);
 	$localCtr = new LocalController($db);
 
-//	$partidas = $ptCtr->proximasPartidas("2013-03-10", 5);
-	$partidas = array();
+	$partidas = $ptCtr->proximasPartidas("2013-03-10", 5);
 ?>
 
 <table class="table">

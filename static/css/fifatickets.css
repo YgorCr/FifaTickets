@@ -2,3 +2,11 @@
 #header {
 	text-align: center;
 }
+
+body {
+  padding-top: 50px;
+}
+
+#container {
+	margin-top: 18px;
+}
