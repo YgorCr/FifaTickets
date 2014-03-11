@@ -26,28 +26,11 @@
 
 		private $attr = array("id", "data", "ingresso_classe_id", "partida_id", "compra_id");
 		
-		public function __construct(){
-			$args = func_get_args();
-			$numArgs = func_num_args();
-
-			foreach ($this->attr as $key => $attrName) {
-				if(Ingresso::validaCampo($attrName, $args[$key])){
-					$this->$attrName = $args[$key];
-				}
-				else{
-					throw new Exception(Ingresso::errorMsg($attrName), 1);
-				}
-			}
-		}
-
 		public function __construct($id ,$data, $forma_de_pagamento, $comprador_id){
 			$args = func_get_args();
 			$numArgs = func_num_args();
 
-			if($numArgs != 5){
-				echo "ERROR: Verifique se está passando todos os parametros corretamente.";
-			}
-			else{
+			if($numArgs >= 5){
 				foreach ($this->attr as $key => $attrName) {
 					if(Ingresso::validaCampo($attrName, $args[$key])){
 						$this->$attrName = $args[$key];

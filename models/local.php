@@ -30,28 +30,11 @@
 
 		private $attr = array("id", "nome", "estado", "cidade", "rua", "bairro", "capacidade");
 		
-		public function __construct(){
-			$args = func_get_args();
-			$numArgs = func_num_args();
-
-			foreach ($this->attr as $key => $attrName) {
-				if(Local::validaCampo($attrName, $args[$key])){
-					$this->$attrName = $args[$key];
-				}
-				else{
-					throw new Exception(Local::errorMsg($attrName), 1);
-				}
-			}
-		}
-		
 		public function __construct($id, $nome, $estado, $cidade, $rua, $bairro, $capacidade){
 			$args = func_get_args();
 			$numArgs = func_num_args();
 
-			if($numArgs != 5){
-				echo "ERROR: Verifique se está passando todos os parametros corretamente.";
-			}
-			else{
+			if($numArgs >= 5){
 				foreach ($this->attr as $key => $attrName) {
 					if(Local::validaCampo($attrName, $args[$key])){
 						$this->$attrName = $args[$key];

@@ -28,28 +28,11 @@
 
 		private $attr = array("id", "nome", "total", "vendidos", "valor");
 		
-		public function __construct(){
-			$args = func_get_args();
-			$numArgs = func_num_args();
-
-			foreach ($this->attr as $key => $attrName) {
-				if(IngressosClasses::validaCampo($attrName, $args[$key])){
-					$this->$attrName = $args[$key];
-				}
-				else{
-					throw new Exception(IngressosClasses::errorMsg($attrName), 1);
-				}
-			}
-		}
-		
 		public function __construct($id, $nome, $total, $vendidos, $valor){
 			$args = func_get_args();
 			$numArgs = func_num_args();
 
-			if($numArgs != 5){
-				echo "ERROR: Verifique se está passando todos os parametros corretamente.";
-			}
-			else{
+			if($numArgs >= 5){
 				foreach ($this->attr as $key => $attrName) {
 					if(IngressosClasses::validaCampo($attrName, $args[$key])){
 						$this->$attrName = $args[$key];
@@ -89,7 +72,7 @@
 					return ((int)$attrValue) >= 0;
 				
 				case 'vendidos':
-					return ((int)$attrValue) >= 0 && ((int)$attrValue) <= $this->total;			
+					return ((int)$attrValue) >= 0;			
 
 				case 'valor':
 					return ((int)$attrValue) >= 0;

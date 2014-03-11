@@ -26,29 +26,12 @@
 		private $comprador_id;
 
 		private $attr = array("id", "data", "forma_de_pagamento", "comprador_id");
-		
-		public function __construct(){
-			$args = func_get_args();
-			$numArgs = func_num_args();
-
-			foreach ($this->attr as $key => $attrName) {
-				if(Compra::validaCampo($attrName, $args[$key])){
-					$this->$attrName = $args[$key];
-				}
-				else{
-					throw new Exception(Compra::errorMsg($attrName), 1);
-				}
-			}
-		}
-		
+			
 		public function __construct($id ,$data, $forma_de_pagamento, $comprador_id){
 			$args = func_get_args();
 			$numArgs = func_num_args();
 
-			if($numArgs != 4){
-				echo "ERROR: Verifique se está passando todos os parametros corretamente.";
-			}
-			else{
+			if($numArgs >= 4){
 				foreach ($this->attr as $key => $attrName) {
 					if(Compra::validaCampo($attrName, $args[$key])){
 						$this->$attrName = $args[$key];
