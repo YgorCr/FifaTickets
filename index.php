@@ -1,7 +1,7 @@
 <?php
 
-require_once('config.php');
-// require_once('connection.php');
+include('config.php');
+
 require_once('class.db.php');
 
 require_once('models/compra.php');
@@ -22,7 +22,9 @@ require_once('controllers/local.controller.php');
 require_once("models/ingressosClasses.php");
 require_once("controllers/ingressosClasses.controller.php");
 
-$db = new db("pgsql:dbname=ufpbdb;host=localhost;","postgres","postgres");
+$configUrl = "pgsql:dbname=".$config["dbname"].";host=".$config["dbhost"].";";
+
+$db = new db($configUrl,$config["dbuser"],$config["dbpass"]);
 
 include("views/home.php");
 
