@@ -51,14 +51,28 @@
 
 	  	<?php
 	  		foreach ($classes as $classe) {
+	  			$restantes = $classe->get("total") - $classe->get("vendidos");
 	  	?>
 
 	  	<tr>
 	  		<td><?php echo $classe->get("id"); ?></td>
 	  		<td><?php echo $classe->get("nome"); ?></td>
-	  		<td><?php echo $classe->get("total") - $classe->get("vendidos"); ?></td>
+	  		<td><?php echo $restantes ?></td>
 	  		<td><?php echo $classe->get("total"); ?></td>
 	  		<td>R$ <?php echo $classe->get("valor"); ?></td>
+	  		
+	  		<?php if($restantes>0){ ?>
+	  		
+	  		<td><a href="?a=compra&classe=<?php echo $classe->get("id") ?>"> <button type="button" class="btn btn-default btn-sm
+					">
+  <span class="glyphicon glyphicon-info-sign"></span> Comprar </button> </a></td>
+	  		
+	  		<?php } else { ?>
+
+	  		<td>Esgotado!</td>
+	  		
+	  		<?php } ?>
+
 	  	</tr>
 
 	  	<?php
