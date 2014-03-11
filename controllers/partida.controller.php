@@ -61,7 +61,7 @@
 			if (isset($limit)) {
 				$sql = $sql." LIMIT $limit";
 			}
-
+			
 			$res = $this->db->run($sql);
 
 			foreach ($res as $arr) {
