@@ -52,6 +52,29 @@
 			return $partidas[0];
 		}
 
+		public function proximasPartidas($data, $limit)
+		{
+			$partidas = array();
+
+			$sql = "SELECT * FROM ".$this->table." WHERE data>='".$data."'";
+			
+			if (isset($limit)) {
+				$sql = $sql." LIMIT $limit";
+			}
+
+			$res = $this->db->run($sql);
+
+			foreach ($res as $arr) {
+				$part = new Partida();
+				foreach ($arr as $key => $value) {
+					$part->set($key, $value);
+				}
+				$partidas[] = $part;
+			}
+
+			return $partidas;
+		}
+
 		public function create($partida)
 		{
 			$all = $partida->get("attr");
