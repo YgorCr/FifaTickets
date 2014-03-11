@@ -5,10 +5,14 @@
 
 ?>
 
-Desenvolvido por
-<p>Gustavo Brito</p>
-<p>Igor Malheiros</p>
-<p>Ygor Crispim</p>
+<div class="panel panel-default">
+  <div class="panel-heading">Desenvolvido por</div>
+  <div class="panel-body">
+    <p>Gustavo Brito</p>
+    <p>Igor Malheiros</p>
+    <p>Ygor Crispim</p>
+  </div>
+</div>
 
 <?php
 
