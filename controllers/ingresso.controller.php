@@ -54,6 +54,7 @@
 			$insert = array();
 			for($i=0;$i<count($all);$i++)
 			{
+				if($all[$i]=="id") continue;
 				$insert[$all[$i]] = $values[$i];
 			}
 

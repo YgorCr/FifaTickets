@@ -26,7 +26,7 @@
 		header("location:?a=home");
 	}*/
 
-	$_SESSION["comprador_id"] = "1";
+	$_SESSION["comprador_id"] = "2"; // TODO: FAZER O LOGIN!
 	$comprador_id = $_SESSION["comprador_id"];
 
 	if(!isset($comprador_id))
@@ -65,17 +65,32 @@
 
 	$_SESSION["compra_classes"] = $classes;
 
-	if(isset($_SESSION["confirm"]))
+	if(isset($_GET["confirm"]))
 	{
-		$compra = new Compra();
-		$compra->set("id", null);
-		$compra->set("data", date("yyyy-mm-dd"));
-		$compra->set("forma_de_pagamento", 0);
-		$compra->set("comprador_id", $comprador_id);
-		$compradorCtr->create($compra);
-		foreach ($classes as $cls) {
-			
+		try {
+			$compra = new Compra();
+			// $compra->set("id", "default"); ID É GERADO NO BANCO!
+			$compra->set("data", date("d/m/y"));
+			$compra->set("forma_de_pagamento", 0);
+			$compra->set("comprador_id", $comprador_id);
+			$compra = $compraCtr->create($compra);
+			foreach ($classes as $cls_id => $count ) {
+				$ingressoCls = $ingressoClassCtr->byId($cls_id);
+				for($i=0;$i<$count;$i++)
+				{
+					$ingresso = new Ingresso();
+					$ingresso->set("ingressos_classes_id", $cls_id);
+					$ingresso->set("compra_id", $compra->get("id"));
+					$ingressoCtr->create($ingresso);
+				}
+			}
+		} catch(Exception $e) {
+			echo "Erro ao processar a compra!";
+			return;
 		}
+		unset($_SESSION["compra_classes"]);
+		$_SESSION["compra_status"]=false;
+		$compraResult = true;
 	}
 
 	// print_r($_SESSION);
@@ -86,6 +101,8 @@
   <div class="panel-heading">Compra de ingresso</div>
   <div class="panel-body">
     
+    <?php if(!$compraResult) { ?>
+
     <table class="table">
     	<tr>
     		<th>#</th>
@@ -98,10 +115,12 @@
 
     	<?php
     		$i = 0;
+    		$totalGeral = 0.0;
     		foreach ($classes as $cls_id => $count) {
     			if($cls_id==null || $cls_id=="") continue;
     			$cls = $ingressoClassCtr->byId($cls_id);
     			$partida = $ptCtr->byId($cls->get("partida_id"));
+    			$totalGeral = $totalGeral + $count * $cls->get("valor");
 
     	?>
 
@@ -119,6 +138,14 @@
     		$i++;
     		}
     	?>
+    	<tr>
+    		<td><b>Total:</b></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td><b><?php echo $totalGeral ?></b></td>
+    	</tr>
 
     </table>
 
@@ -126,6 +153,12 @@
     	<a href="?a=compra&confirm"> <button type="button" class="btn btn-default btn-sm">
     	  <span class="glyphicon glyphicon-ok"></span> Comprar </button> </a>
     </center>
+
+    <?php } else { ?>
+
+    Compra realizada com sucesso!
+
+    <?php } ?>
 
   </div>
 </div>

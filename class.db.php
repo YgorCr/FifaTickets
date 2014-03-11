@@ -15,6 +15,7 @@ class db extends PDO {
 		try {
 			parent::__construct($dsn, $user, $passwd, $options);
 		} catch (PDOException $e) {
+			echo $e->getMessage();
 			$this->error = $e->getMessage();
 		}
 	}
@@ -54,6 +55,7 @@ class db extends PDO {
 
 			$func = $this->errorCallbackFunction;
 			$func($msg);
+			print_r($msg);
 		}
 	}
 
@@ -109,7 +111,7 @@ class db extends PDO {
 		$this->sql = trim($sql);
 		$this->bind = $this->cleanup($bind);
 		$this->error = "";
-
+		
 		try {
 			$pdostmt = $this->prepare($this->sql);
 			if($pdostmt->execute($this->bind) !== false) {

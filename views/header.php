@@ -40,9 +40,18 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="?a=home">Partidas</a></li>
-            <li><a href="?a=comprador">Meu cadastro</a></li>
-            <li><a href="?a=sobre">Sobre</a></li>
+            <li 
+              <?php if($ac=="home" || $ac=="partidas"){ ?> class="active" <?php } ?>
+               ><a href="?a=home">Partidas</a></li>
+
+            <li 
+              <?php if($ac=="cadastro"){ ?> class="active" <?php } ?>
+               ><a href="?a=comprador">Meu cadastro</a></li>
+
+            <li 
+              <?php if($ac=="sobre"){ ?> class="active" <?php } ?>
+               ><a href="?a=sobre">Sobre</a></li>
+
           </ul>
         </div><!--/.nav-collapse -->
       </div>
