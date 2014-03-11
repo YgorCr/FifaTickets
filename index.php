@@ -22,7 +22,7 @@ require_once('controllers/local.controller.php');
 require_once("models/ingressosClasses.php");
 require_once("controllers/ingressosClasses.controller.php");
 
-$db = new db("pgsql:dbname=ufpbdb5;host=localhost;","postgres","postgres");
+$db = new db("pgsql:dbname=ufpbdb;host=localhost;","postgres","postgres");
 
 include("views/home.php");
 
