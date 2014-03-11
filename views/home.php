@@ -34,6 +34,7 @@
 				<td><?php echo $partida->get("tipo"); ?></td>
 				<td><?php echo $partida->get("data"); ?></td>
 				<td><?php echo $local->get("nome"); ?></td>
+				<td><a href="?a=partida&id=<?php echo $partida->get("id") ?>">Ver</a></td>
 			</tr>
 
 	<?php

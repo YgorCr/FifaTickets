@@ -26,6 +26,18 @@ $configUrl = "pgsql:dbname=".$config["dbname"].";host=".$config["dbhost"].";";
 
 $db = new db($configUrl,$config["dbuser"],$config["dbpass"]);
 
-include("views/home.php");
+$ac = $_GET["a"];
+
+if(!isset($ac) || $ac=="")
+{
+	$ac = "home";
+}
+
+if(file_exists("views/$ac.php"))
+{
+	include("views/$ac.php");
+} else {
+	include("views/404.php");
+}
 
 ?>
