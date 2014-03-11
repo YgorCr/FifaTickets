@@ -25,14 +25,15 @@
 		private $total;
 		private $vendidos;
 		private $valor;
+		private $partida_id;
 
-		private $attr = array("id", "nome", "total", "vendidos", "valor");
+		private $attr = array("id", "nome", "total", "vendidos", "valor", "partida_id");
 		
-		public function __construct($id, $nome, $total, $vendidos, $valor){
+		public function __construct($id, $nome, $total, $vendidos, $valor, $partida_id){
 			$args = func_get_args();
 			$numArgs = func_num_args();
 
-			if($numArgs >= 5){
+			if($numArgs >= 6){
 				foreach ($this->attr as $key => $attrName) {
 					if(IngressosClasses::validaCampo($attrName, $args[$key])){
 						$this->$attrName = $args[$key];
@@ -76,6 +77,9 @@
 
 				case 'valor':
 					return ((int)$attrValue) >= 0;
+
+				case 'partida_id':
+					return (is_numeric($attrValue));
 
 				case 'attr':
 					return false;
