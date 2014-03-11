@@ -20,7 +20,7 @@
 
 <div class="panel panel-default">
 	<div class="panel-heading"><font size="5"><strong>Cadastro de usuários</strong></font></div>
-	<div class="panel-body">
+	<div class="panel-body" style="width=100%">
 		<form>
 			O campos marcados com <span style="color:red">*</span> são obrigatórios!<br><br>
 			<table>
@@ -91,8 +91,10 @@
 					<td class="tdform"><input type="password" name="senha" class="form-control"></td>
 				</tr>
 			</table>
-			<div>
-				<center><input type="submit" value="Enviar"></center>
+			<br>
+			<div class="btn-group" style="margin-left: 78px">
+			  <button type="button" class="btn btn-default">Cancelar</button>
+			  <button type="submit" class="btn btn-default">Enviar</button>
 			</div>
 		</form>
 	</div>
