@@ -47,6 +47,7 @@
 	  		<th>Restantes</th>
 	  		<th>Total</th>
 	  		<th>Valor</th>
+	  		<th></th>
 	  	</tr>
 
 	  	<?php
@@ -65,7 +66,7 @@
 	  		
 	  		<td><a href="?a=compra&classe=<?php echo $classe->get("id") ?>"> <button type="button" class="btn btn-default btn-sm
 					">
-  <span class="glyphicon glyphicon-info-sign"></span> Comprar </button> </a></td>
+  <span class="glyphicon glyphicon-plus"></span> Comprar </button> </a></td>
 	  		
 	  		<?php } else { ?>
 
