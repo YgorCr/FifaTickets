@@ -30,7 +30,7 @@
 
 		private $attr = array("id", "nome", "estado", "cidade", "rua", "bairro", "capacidade");
 		
-		public function __construct($id, $nome, $estado, $cidade, $rua, $bairro, $capacidade){
+		public function __construct(/* $id, $nome, $estado, $cidade, $rua, $bairro, $capacidade */){
 			$args = func_get_args();
 			$numArgs = func_num_args();
 
