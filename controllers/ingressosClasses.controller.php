@@ -72,10 +72,17 @@
 
 			$insert = array();
 			for($i=0;$i<count($all);$i++){
+				if($all[$i]=="id") continue;
 				$insert[$all[$i]] = $values[$i];
 			}
 
-			return $this->db->insert($this->table, $insert);
+			$this->db->insert($this->table, $insert);
+
+			$res = $this->db->run("SELECT CURRVAL('".$this->table."_id_seq');");
+
+			$ingressoClass->set("id", $res[0]["currval"]);
+
+			return $ingressoClass;
 
 		}
 

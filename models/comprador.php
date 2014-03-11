@@ -68,7 +68,7 @@
 
 			switch ($attrName) {
 				case 'id':
-					return (is_numeric($attrValue)) || $tam == 0;
+					return $tam != 0;
 
 				case 'nome':
 					return ($tam > 0);

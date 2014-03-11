@@ -49,10 +49,17 @@
 			$insert = array();
 			for($i=0;$i<count($all);$i++)
 			{
+				if($all[$i]=="id") continue;
 				$insert[$all[$i]] = $values[$i];
 			}
 
-			return $this->db->insert('local', $insert);
+			$this->db->insert('local', $insert);
+
+			$res = $this->db->run("SELECT CURRVAL('local_id_seq');");
+
+			$local->set("id", $res[0]["currval"]);
+
+			return $local;
 
 		}
 
