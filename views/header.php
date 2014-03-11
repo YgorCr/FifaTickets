@@ -43,6 +43,7 @@
             <li class="active"><a href="#">Partidas</a></li>
             <li><a href="#me">Meu cadastro</a></li>
             <li><a href="#about">Sobre</a></li>
+            <li><a href="?a=compra">Compra de Ingressos</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
