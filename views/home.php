@@ -7,23 +7,44 @@
 
 <?php
 
-	require_once("models/comprador.php");
-	require_once("controllers/comprador.controller.php");
+	$ptCtr = new PartidaController($db);
+	$localCtr = new LocalController($db);
 
-	$ctr = new CompradorController($db);
-
-	$compradores = $ctr->all();	
-
-	foreach ($compradores as $comprador) {
+	$partidas = $ptCtr->all(5);
 
 ?>
 
-	Nome: <?php echo $comprador->get("nome");  ?><br>
+<table class="table">
 
+	<tr>
+		<th>#</th>
+		<th>Partida:</th>
+		<th>Tipo:</th>
+		<th>Data:</th>
+		<th>Local:</th>
+	</tr>
+
+	<?php
+		foreach ($partidas as $partida) {
+			$local = $localCtr->byId($partida->get("local_id"));
+	?>
+
+	<tr>
+		<td><?php echo $partida->get("id"); ?></td>
+		<td><?php echo $partida->get("nome"); ?></td>
+		<td><?php echo $partida->get("tipo"); ?></td>
+		<td><?php echo $partida->get("data"); ?></td>
+		<td><?php echo $local->get("nome"); ?></td>
+	</tr>
+
+	<?php
+		}
+	?>
+
+</table>
+	
 
 <?php
-
-	}
 
 	// arquivo comum para o final das páginas
 	include("footer.php");

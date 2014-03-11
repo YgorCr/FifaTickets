@@ -7,12 +7,21 @@
 
 		private $table = "partida";
 
-		public function all()
+		public function all($limit)
 		{
 
-			$res = $this->db->select($this->table);
-
 			$partidas = array();
+
+			if(isset($limit) && $limit>0)
+			{
+
+				$res = $this->db->run("SELECT * FROM ".$this->table." LIMIT $limit");
+
+			} else {
+
+				$res = $this->db->select($this->table);
+
+			}
 
 			foreach ($res as $arr) {
 				$part = new Partida();
