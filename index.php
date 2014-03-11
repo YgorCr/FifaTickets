@@ -33,9 +33,9 @@ if(!isset($ac) || $ac=="")
 	$ac = "home";
 }
 
-if(file_exists("views/$ac.php"))
+if(file_exists("views/$ac.view.php"))
 {
-	include("views/$ac.php");
+	include("views/$ac.view.php");
 } else {
 	include("views/404.php");
 }
