@@ -32,11 +32,9 @@
 		header("index.php");
 	}
 
-	$ERROR = "";
-
-	if( !strlen($_POST["nome"])   || !strlen($_POST["cpf_cod"]) || !strlen($_POST["telefone"]) ||
-		!strlen($_POST["estado"]) || !strlen($_POST["cidade"] ) || !strlen($_POST["rua"])      || 
-		!strlen($_POST["bairro"]) || !strlen($_POST["senha"]  ))
+	if(  isset($_POST["nome"])     && (!strlen($_POST["nome"])   || !strlen($_POST["cpf_cod"]) ||
+		!strlen($_POST["telefone"]) || !strlen($_POST["estado"]) || !strlen($_POST["cidade"] ) ||
+		!strlen($_POST["rua"])      || !strlen($_POST["bairro"]) || !strlen($_POST["senha"]  )))
 	{
 		$ERROR = '<div class="panel panel-default">
 					<div class="panel-body" style = "background-color: #DDDDCC" ><font color="red">';
@@ -47,30 +45,32 @@
 		}
 		$ERROR = $ERROR.'</font></div></div>';
 	}
-
-	/* *
-	foreach ($_POST as $key => $value)
+	else
 	{
-		echo $key." = '".$value."' length = ".strlen($value)."<br>";		
-	}
-	/* */
+		/* *
+		foreach ($_POST as $key => $value)
+		{
+			echo $key." = '".$value."' length = ".strlen($value)."<br>";		
+		}
+		/* */
 
-	$compradorCtrl = new CompradorController($db);
-	$novoComprador = new Comprador();
-	foreach ($_POST as $key => $value) {
-		$novoComprador->set($key, $value);
-	}
+		$compradorCtrl = new CompradorController($db);
+		$novoComprador = new Comprador();
+		foreach ($_POST as $key => $value) {
+			$novoComprador->set($key, $value);
+		}
 
-	$sql = 'select max(id) from comprador';
-	$id = $compradorCtrl->run($sql);
-	//$id = $id[0];
-	echo $id."<br>";
-	//$novoComprador->set("id", );
+		$sql = 'select max(id) from comprador';
+		$id = $db->run($sql);
+		//$id = $id[0];
+		echo $id."<br>";
+		//$novoComprador->set("id", );
 
-	$compradorCtrl->create($novoComprador);
+		$compradorCtrl->create($novoComprador);
 
-	foreach ($_POST as $key => $value) {
-		echo $novoComprador->get($key)."<br>";
+		foreach ($_POST as $key => $value) {
+			echo $novoComprador->get($key)."<br>";
+		}
 	}
 ?>
 
