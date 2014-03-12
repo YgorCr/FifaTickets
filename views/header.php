@@ -53,6 +53,16 @@
                ><a href="?a=sobre">Sobre</a></li>
 
           </ul>
+
+          <form class="navbar-form navbar-right" role="search" action="">
+            <div class="form-group">
+              <input type="hidden" name="a" value="buscar"/>
+              <input type="hidden" name="by" value="nome" />
+              <input type="text" class="form-control" placeholder="Buscar partida" name="q">
+            </div>
+            <button type="submit" class="btn btn-default">Buscar</button>
+          </form>
+
         </div><!--/.nav-collapse -->
       </div>
     </div>

@@ -76,6 +76,44 @@
 			return $partidas;
 		}
 
+		public function byNome($nome)
+		{
+			$bind = array(
+			    ":search" => "%$nome%"
+			);
+			$res = $this->db->select($this->table, "nome LIKE :search", $bind);
+
+			foreach ($res as $arr) {
+				$part = new Partida();
+				foreach ($arr as $key => $value) {
+					$part->set($key, $value);
+				}
+				$partidas[] = $part;
+			}
+
+			return $partidas;
+
+		}
+
+		public function byData($data)
+		{
+			$bind = array(
+			    ":search" => "$data"
+			);
+			$res = $this->db->select($this->table, "data = :search", $bind);
+
+			foreach ($res as $arr) {
+				$part = new Partida();
+				foreach ($arr as $key => $value) {
+					$part->set($key, $value);
+				}
+				$partidas[] = $part;
+			}
+
+			return $partidas;
+
+		}
+
 		public function create($partida)
 		{
 			$all = $partida->get("attr");

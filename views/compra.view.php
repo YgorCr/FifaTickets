@@ -49,15 +49,30 @@
 		{ 
 
 			$classes[$classe_id]--;
+			$vendidos = $novaClasse->get("vendidos");
+			$vendidos--;
+			$novaClasse->set("vendidos", $vendidos);
+			$ingressoClassCtr->update($novaClasse);
 			if($classes[$classe_id]<=0 || $classes[$classe_id]==null)
 				unset($classes[$classe_id]);
 
 		} else {
 
-			if(!isset($classes[$classe_id]))
-				$classes[$classe_id] = 1;
-			else
-				$classes[$classe_id]++;
+			$vendidos = $novaClasse->get("vendidos");
+			$total = $novaClasse->get("total");
+			if($vendidos<$total)
+			{
+				$vendidos++;
+				$novaClasse->set("vendidos",$vendidos);
+				$ingressoClassCtr->update($novaClasse);	
+
+				if(!isset($classes[$classe_id]))
+					$classes[$classe_id] = 1;
+				else
+					$classes[$classe_id]++;
+			} else {
+				$errorMsg = "Ingressos esgotados!";
+			}
 
 		}
 
@@ -107,7 +122,22 @@ function confirm()
 	window.location=url;
 }
 </script>
+
+<?php
+	if($errorMsg!=null) {
+?>
 	
+	<div class="panel panel-warning">
+	  <div class="panel-heading">Erro!</div>
+	  <div class="panel-body">
+	    <?php echo $errorMsg; ?>
+	  </div>
+	</div>
+
+<?php
+	}
+?>
+
 <div class="panel panel-default">
   <div class="panel-heading">Compra de ingresso</div>
   <div class="panel-body">
