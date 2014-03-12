@@ -67,11 +67,14 @@
 
 	if(isset($_GET["confirm"]))
 	{
+		$pagamento = $_GET["pagamento"];
+		if($pagamento>1 || $pagamento==null) $pagamento=0;
+
 		try {
 			$compra = new Compra();
 			// $compra->set("id", "default"); ID É GERADO NO BANCO!
 			$compra->set("data", date("d/m/y"));
-			$compra->set("forma_de_pagamento", 0);
+			$compra->set("forma_de_pagamento", $pagamento);
 			$compra->set("comprador_id", $comprador_id);
 			$compra = $compraCtr->create($compra);
 			foreach ($classes as $cls_id => $count ) {
@@ -96,6 +99,14 @@
 	// print_r($_SESSION);
 
 ?>
+
+<script type="text/javascript">
+function confirm()
+{
+	var url = "?a=compra&pagamento="+$("#pagamento_select").val()+"&confirm";
+	window.location=url;
+}
+</script>
 	
 <div class="panel panel-default">
   <div class="panel-heading">Compra de ingresso</div>
@@ -147,11 +158,25 @@
     		<td><b><?php echo $totalGeral ?></b></td>
     	</tr>
 
+    	<tr>
+    		<td><b>Forma de pagamento:</b></td>
+    		<td></td>
+    		<td>
+    			<select class="form-control" id="pagamento_select">
+    				<option value="0">Boleto</option>
+    				<option value="1">Cartão</option>
+    			</select>
+    		</td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    	</tr>
+
     </table>
 
     <center>
-    	<a href="?a=compra&confirm"> <button type="button" class="btn btn-default btn-sm">
-    	  <span class="glyphicon glyphicon-ok"></span> Comprar </button> </a>
+    	<button type="button" class="btn btn-default btn-sm" onclick="javascript:confirm();">
+    	  <span class="glyphicon glyphicon-ok"></span> Comprar </button>
     </center>
 
     <?php } else { ?>
