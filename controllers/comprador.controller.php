@@ -53,10 +53,17 @@
 			$insert = array();
 			for($i=0;$i<count($all);$i++)
 			{
+				if($all[$i]=="id") continue;
 				$insert[$all[$i]] = $values[$i];
 			}
 
-			return $this->db->insert('comprador', $insert);
+			$this->db->insert('comprador', $insert);
+
+			$res = $this->db->run("SELECT CURRVAL('comprador_id_seq');");
+
+			$comprador->set("id", $res[0]["currval"]);
+
+			return $comprador;
 
 		}
 

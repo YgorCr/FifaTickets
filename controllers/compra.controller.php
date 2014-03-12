@@ -47,10 +47,17 @@
 
 			$insert = array();
 			for($i=0;$i<count($all);$i++){
+				if($all[$i]=="id") continue;
 				$insert[$all[$i]] = $values[$i];
 			}
 
-			return $this->db->insert('compra', $insert);
+			$this->db->insert('compra', $insert);
+
+			$res = $this->db->run("SELECT CURRVAL('compra_id_seq');");
+
+			$compra->set("id", $res[0]["currval"]);
+
+			return $compra;
 
 		}
 

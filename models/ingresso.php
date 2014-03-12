@@ -20,11 +20,11 @@
 	class Ingresso {
 		private $id;
 		private $data;
-		private $ingresso_classe_id;
+		private $ingressos_classes_id;
 		private $partida_id;
 		private $compra_id;
 
-		private $attr = array("id", "data", "ingresso_classe_id", "partida_id", "compra_id");
+		private $attr = array("id", "data", "ingressos_classes_id", "partida_id", "compra_id");
 		
 		public function __construct(/* $id ,$data, $forma_de_pagamento, $comprador_id */){
 			$args = func_get_args();
@@ -61,13 +61,13 @@
 
 			switch ($attrName) {
 				case 'id':
-					return (is_numeric($attrValue)) || $tam == 0;
+					return $tam != 0;
 
 				case 'data':			
 					list ($ano, $mes, $dia) = split ('[/.-]', $attrValue);
 					return checkdate($mes, $dia, $ano);
 
-				case 'ingresso_classe_id':
+				case 'ingressos_classes_id':
 					return (is_numeric($attrValue));
 
 				case 'partida_id':
