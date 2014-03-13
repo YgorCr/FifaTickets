@@ -15,7 +15,7 @@
 	$total = 0;
 	$totalVendidos = 0;
 	$ingressosClassesCtr = new IngressosClassesController($db);
-	$classes = $ingressosClassesCtr->all();
+	$classes = $ingressosClassesCtr->all(0);
 	foreach ($classes as $classe) {
 		$total = $total + $classe->get("total");
 		$totalVendidos = $totalVendidos + $classe->get("vendidos");
