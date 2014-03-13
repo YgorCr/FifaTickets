@@ -37,6 +37,27 @@
 
 			return $compras[0];
 		}
+
+		public function byCompradorId($comprador_id){
+			$res = $this->db->select("compra", "comprador_id='".$comprador_id."'");
+
+			$compras = array();
+
+			foreach ($res as $arr) {
+				$comp = new Compra();
+				foreach ($arr as $key => $value) {
+					$comp->set($key, $value);
+				}
+				$compras[] = $comp;
+			}
+
+			return $compras;
+		}
+
+		public function byComprador($comprador)
+		{
+			return $this->byCompradorId($comprador->get("id"));
+		}
 				
 		public function create($compra){
 			$all = $compra->get("attr");

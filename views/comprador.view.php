@@ -29,7 +29,7 @@
 
 	if($comprador)
 	{
-		header("location:?a=home");
+		header("location:?a=me");
 	}
 
 	if(isset($_GET["post"]))

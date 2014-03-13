@@ -23,3 +23,8 @@ body {
 	font-size: 25px;
 	font-style: bold;
 }
+
+.hdefault {
+	font-size: 20px;
+	font-style: normal;
+}

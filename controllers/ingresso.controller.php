@@ -43,6 +43,28 @@
 			return $ingressos[0];
 		}
 
+		public function byCompraId($compra_id)
+		{
+			$res = $this->db->select($this->table, "compra_id='".$compra_id."'");
+
+			$ingressos = array();
+
+			foreach ($res as $arr) {
+				$ingresso = new Ingresso();
+				foreach ($arr as $key => $value) {
+					$ingresso->set($key, $value);
+				}
+				$ingressos[] = $ingresso;
+			}
+
+			return $ingressos;			
+		}
+
+		public function byCompra($compra)
+		{
+			return $this->byCompraId($compra->get("id"));
+		}
+
 		public function create($ingresso)
 		{
 			$all = $ingresso->get("attr");
