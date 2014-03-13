@@ -26,10 +26,7 @@
 		header("location:?a=home");
 	}*/
 
-	$_SESSION["comprador_id"] = "2"; // TODO: FAZER O LOGIN!
-	$comprador_id = $_SESSION["comprador_id"];
-
-	if(!isset($comprador_id))
+	if(!$comprador)
 	{
 	
 		header("location:?a=comprador");

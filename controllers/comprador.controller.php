@@ -42,6 +42,25 @@
 			return $compradores[0];
 		}
 
+		public function tryLogin($cpf, $senha)
+		{
+			$md5 = md5($senha);
+
+			$res = $this->db->run("SELECT * FROM comprador WHERE cpf_cod='".$cpf."' AND senha='".$md5."'");
+
+			$compradores = array();
+
+			foreach ($res as $arr) {
+				$comp = new Comprador();
+				foreach ($arr as $key => $value) {
+					$comp->set($key, $value);
+				}
+				$compradores[] = $comp;
+			}
+
+			return $compradores[0];
+		}
+
 		public function create($comprador)
 		{
 			$all = $comprador->get("attr");

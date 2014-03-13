@@ -42,6 +42,25 @@
 			return $administradores[0];
 		}
 
+		public function tryLogin($cpf, $senha)
+		{
+			$md5 = md5($senha);
+
+			$res = $this->db->run("SELECT * FROM administrador WHERE cpf_cod='".$cpf."' AND senha='".$md5."'");
+
+			$administradores = array();
+
+			foreach ($res as $arr) {
+				$admin = new Administrador();
+				foreach ($arr as $key => $value) {
+					$admin->set($key, $value);
+				}
+				$administradores[] = $admin;
+			}
+
+			return $administradores[0];
+		}
+
 		public function create($administrador){
 			$all = $administrador->get("attr");
 			$values = array();

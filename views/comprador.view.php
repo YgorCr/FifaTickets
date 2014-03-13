@@ -27,49 +27,53 @@
 
 <?php
 
-	if(isset($_SESSION["comprador_id"]))
+	if($comprador)
 	{
-		header("index.php");
+		header("location:?a=home");
 	}
 
-	if(  isset($_POST["nome"])     && (!strlen($_POST["nome"])   || !strlen($_POST["cpf_cod"]) ||
-		!strlen($_POST["telefone"]) || !strlen($_POST["estado"]) || !strlen($_POST["cidade"] ) ||
-		!strlen($_POST["rua"])      || !strlen($_POST["bairro"]) || !strlen($_POST["senha"]  )))
+	if(isset($_GET["post"]))
 	{
-		$ERROR = '<div class="panel panel-default">
-					<div class="panel-body" style = "background-color: #DDDDCC" ><font color="red">';
-		foreach ($_POST as $key => $value) {
-			if(!strlen($_POST[$key])){
-				$ERROR = $ERROR.'O campo '.$key.' é obrigatório. Por favor, tente novamente.<br>';
-			}
-		}
-		$ERROR = $ERROR.'</font></div></div>';
-	}
-	else
-	{
-		/* *
-		foreach ($_POST as $key => $value)
+		if(  isset($_POST["nome"])     && (!strlen($_POST["nome"])   || !strlen($_POST["cpf_cod"]) ||
+			!strlen($_POST["telefone"]) || !strlen($_POST["estado"]) || !strlen($_POST["cidade"] ) ||
+			!strlen($_POST["rua"])      || !strlen($_POST["bairro"]) || !strlen($_POST["senha"]  )))
 		{
-			echo $key." = '".$value."' length = ".strlen($value)."<br>";		
+			$ERROR = '<div class="panel panel-default">
+						<div class="panel-body" style = "background-color: #DDDDCC" ><font color="red">';
+			foreach ($_POST as $key => $value) {
+				if(!strlen($_POST[$key])){
+					$ERROR = $ERROR.'O campo '.$key.' é obrigatório. Por favor, tente novamente.<br>';
+				}
+			}
+			$ERROR = $ERROR.'</font></div></div>';
 		}
-		/* */
+		else
+		{
+			/* *
+			foreach ($_POST as $key => $value)
+			{
+				echo $key." = '".$value."' length = ".strlen($value)."<br>";		
+			}
+			/* */
 
-		$compradorCtrl = new CompradorController($db);
-		$novoComprador = new Comprador();
-		foreach ($_POST as $key => $value) {
-			$novoComprador->set($key, $value);
-		}
+			$compradorCtrl = new CompradorController($db);
+			$novoComprador = new Comprador();
+			foreach ($_POST as $key => $value) {
+				if($key=="telefone")
+				{
+					$value = str_replace(" ", "", $value);
+					$value = str_replace("-", "", $value);
+				} else if($key=="senha") {
+					$value = md5($value);
+				}
 
-		$sql = 'select max(id) from comprador';
-		$id = $db->run($sql);
-		//$id = $id[0];
-		echo $id."<br>";
-		//$novoComprador->set("id", );
+				$novoComprador->set($key, $value);
+			}
 
-		$compradorCtrl->create($novoComprador);
+			$novoComprador = $compradorCtrl->create($novoComprador);
 
-		foreach ($_POST as $key => $value) {
-			echo $novoComprador->get($key)."<br>";
+			header("location:?a=comprador.login");
+
 		}
 	}
 ?>
@@ -82,9 +86,9 @@
 ?>
 
 <div class="panel panel-default">
-	<div class="panel-heading"><font size="5"><strong>Cadastro de usuários</strong></font></div>
+	<div class="panel-heading">Cadastro de usuários</div>
 	<div class="panel-body">
-		<form method = "post" action="index.php?a=comprador">
+		<form method = "post" action="index.php?a=comprador&post">
 			<?php
 				if(strlen($ERROR)){
 					echo $ERROR;

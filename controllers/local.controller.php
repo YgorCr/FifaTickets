@@ -38,6 +38,27 @@
 			return $locais[0];
 		}
 		
+		public function byNome($nome)
+		{
+			$locais = array();
+
+			$bind = array(
+			    ":search" => "%$nome%"
+			);
+			$res = $this->db->select("local", "nome LIKE :search", $bind);
+
+			foreach ($res as $arr) {
+				$local = new Local();
+				foreach ($arr as $key => $value) {
+					$local->set($key, $value);
+				}
+				$locais[] = $local;
+			}
+
+			return $locais;
+
+		}
+
 		public function create($local){
 			
 			$all = $local->get("attr");

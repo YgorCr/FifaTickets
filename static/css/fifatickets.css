@@ -18,3 +18,8 @@ body {
 .tdlabel {
 	padding-top: 16px;
 }
+
+.panel-heading {
+	font-size: 25px;
+	font-style: bold;
+}

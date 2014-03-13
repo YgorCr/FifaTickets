@@ -22,9 +22,8 @@
 	  <!-- Default panel contents -->
 	  <div class="panel-heading"><?php echo $partida->get("nome"); ?></div>
 	  <div class="panel-body">
-	    <p><?php echo $partida->get("tipo"); ?></p>
-	    <p><?php echo $partida->get("data"); ?></p>
-	    <p><?php echo $partida->get("data"); ?></p>
+	    <p>Tipo: <b><?php echo $partida->get("tipo"); ?></b></p>
+	    <p>Data: <b><?php echo $partida->get("data"); ?></b></p>
 	    
 	    <div class="panel panel-default">
 	      <div class="panel-heading">Local</div>

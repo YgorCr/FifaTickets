@@ -1,6 +1,12 @@
    </div><!-- /.container -->
 
 
+   <div class="navbar">
+   	<center>
+   		<a href="?a=admin">Admin</a> <?php if($admin) { ?> | <a href="?a=logout">Logout</a> <?php } ?>
+   	</center>
+   </div>
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

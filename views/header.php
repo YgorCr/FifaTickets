@@ -45,12 +45,24 @@
                ><a href="?a=home">Partidas</a></li>
 
             <li 
-              <?php if($ac=="cadastro"){ ?> class="active" <?php } ?>
+              <?php if($ac=="comprador"){ ?> class="active" <?php } ?>
                ><a href="?a=comprador">Meu cadastro</a></li>
 
             <li 
               <?php if($ac=="sobre"){ ?> class="active" <?php } ?>
                ><a href="?a=sobre">Sobre</a></li>
+
+            <li 
+              <?php if($ac=="comprador.login"){ ?> class="active" <?php } ?>
+               >
+
+               <?php if(!$comprador){ ?>
+                <a href="?a=comprador.login">Login</a>
+              <?php } else { ?>
+                <a href="#"><?php echo $comprador->get("nome"); ?></a>
+              <?php } ?>
+
+             </li>
 
           </ul>
 
