@@ -21,7 +21,7 @@
 		$totalVendidos = $totalVendidos + $classe->get("vendidos");
 	}
 
-	$totalPartidas = count($ptCtr->all());
+	$totalPartidas = count($ptCtr->all(0));
 
 ?>
 
