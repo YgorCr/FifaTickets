@@ -77,7 +77,7 @@
 					return ($tam <= 15 && $tam > 0);
 					
 				case 'telefone':
-					return (is_numeric($attrValue) && ($tam >= 9 && $tam <= 20));
+					return (is_numeric($attrValue) && ($tam >= 8 && $tam <= 20));
 					
 				case 'estado':
 				case 'cidade':
@@ -97,7 +97,7 @@
 					return false;
 
 				default:
-					throw new Exception("O atributo ".$attrName." não pertence a esta classe. Atributo desconhecido!", 1);
+					return "O atributo ".$attrName." não pertence a esta classe. Atributo desconhecido!";
 			}
 		}
 
