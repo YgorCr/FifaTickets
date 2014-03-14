@@ -150,11 +150,6 @@
         </tr>
 
         <tr>
-          <td class="tdlabel">Vendidos<span style="color:red">*</span>: </td>
-          <td class="tdform"><input type="text" name="vendidos" class="form-control" value="<?php echo $vendidos; ?>"></td>
-        </tr>
-
-        <tr>
           <td class="tdlabel">Valor<span style="color:red">*</span>: </td>
           <td class="tdform"><input type="text" name="valor" class="form-control" value="<?php echo $valor; ?>"></td>
         </tr>

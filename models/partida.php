@@ -65,7 +65,7 @@
 					return $tam != 0;
 
 				case 'data':			
-					list ($ano, $mes, $dia) = split ('[/.-]', $attrValue);
+					list ($ano, $mes, $dia) = split('[/.-]', $attrValue);
 					return checkdate($mes, $dia, $ano);
 
 				case 'nome':
