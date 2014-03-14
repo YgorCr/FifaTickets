@@ -7,7 +7,7 @@
 
 		private $attr = array("id", "nome", "cpf_cod", "senha");
 		
-		public function __construct($id, $nome, $cpf_cod, $senha){
+		public function __construct(/*$id, $nome, $cpf_cod, $senha*/){
 			$args = func_get_args();
 			$numArgs = func_num_args();
 

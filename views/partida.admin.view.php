@@ -5,9 +5,9 @@
   function partidaFormataData($data, $toDB)
   {
     if($toDB)
-      return implode("-", array_reverse(split("/", $data)));
+      return implode("-", array_reverse(explode("/", $data)));
     else
-      return implode("/", array_reverse(split("-", $data)));
+      return implode("/", array_reverse(explode("-", $data)));
   }
 
 	// arquivo comum para o cabeçalho das páginas
