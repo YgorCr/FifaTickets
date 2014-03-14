@@ -10,6 +10,11 @@
 			documento.value += texto.substring(0,1);
 		}
 	}
+	function cleanMe()
+	{
+		$(".form-control").val("");
+		$("#estado").val(0);
+	}
 </script>
 
 <!--
@@ -111,7 +116,7 @@
 				<tr>
 					<td class="tdlabel">Estado<span style="color:red">*</span>: </td>
 					<td class="tdform">
-						<select class="form-control" name="estado">
+						<select class="form-control" name="estado" id="estado">
 						  <option value="0">Selecione seu Estado</option>
 						  <option value="AC">AC</option>
 						  <option value="AL">AL</option>
@@ -165,7 +170,7 @@
 			</table>
 			<br>
 			<div class="btn-group" style="margin-left: 78px">
-			  <button type="button" class="btn btn-default">Cancelar</button>
+			  <button type="button" class="btn btn-default" onclick="javascript:cleanMe();">Cancelar</button>
 			  <button type="submit" class="btn btn-default">Enviar</button>
 			</div>
 		</form>
