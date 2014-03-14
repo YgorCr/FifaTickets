@@ -10,11 +10,6 @@
 			documento.value += texto.substring(0,1);
 		}
 	}
-	function cleanMe()
-	{
-		$(".form-control").val("");
-		$("#estado").val(0);
-	}
 </script>
 
 <!--
@@ -170,7 +165,7 @@
 			</table>
 			<br>
 			<div class="btn-group" style="margin-left: 78px">
-			  <button type="button" class="btn btn-default" onclick="javascript:cleanMe();">Cancelar</button>
+			  <button type="clean" class="btn btn-default">Cancelar</button>
 			  <button type="submit" class="btn btn-default">Enviar</button>
 			</div>
 		</form>
