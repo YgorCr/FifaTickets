@@ -42,25 +42,37 @@
     $tipo = $_POST["tipo"];
     $local_id = $_POST["local_id"];
 
-    $partida->set("nome", $nome);
-    $partida->set("data", $data);
-    $partida->set("tipo", $tipo);
-    $partida->set("local_id", $local_id);
+    if($nome && 
+    $data && 
+    $tipo && 
+    $local_id )
+    {
 
-      if(isset($partida_id))
-      {
-        if($partidaCtr->update($partida))
-          $successMsg = "Partida atualizada com sucesso!";
-      } else {
-        $partida = $partidaCtr->create($partida);
-        $partida_id = $partida->get("id");
-        $successMsg = "Local cadastrado com sucesso!";
-      }
-      
-      if(!$partida)
-      {
-        $errorMsg = "Erro ao cadastrar partida!";
-      }
+      $partida->set("nome", $nome);
+      $partida->set("data", $data);
+      $partida->set("tipo", $tipo);
+      $partida->set("local_id", $local_id);
+
+        if(isset($partida_id))
+        {
+          if($partidaCtr->update($partida))
+            $successMsg = "Partida atualizada com sucesso!";
+        } else {
+          $partida = $partidaCtr->create($partida);
+          $partida_id = $partida->get("id");
+          $successMsg = "Local cadastrado com sucesso!";
+        }
+        
+        if(!$partida || count($partida->getErrors())>0)
+        {
+          $errorMsg = "Erro ao cadastrar partida!";
+          $successMsg = "";
+        }
+
+    } else {
+      $errorMsg = "Preencha os campos obrigatórios!";
+    }
+
     }
 
     if(isset($_GET["remove"]))
@@ -84,11 +96,7 @@
 </div>
 
 <?php
-  }
-?>
-
-<?php
-  if($successMsg) {
+  } else if($successMsg) {
 ?>
 
 <div class="panel panel-success">
@@ -99,7 +107,7 @@
 </div>
 
 <?php
-  }
+  } else {
 ?>
 
 <div class="panel panel-default">
@@ -206,6 +214,8 @@
 
   </div>
 </div>
+
+<?php } ?>
 
 <?php
 

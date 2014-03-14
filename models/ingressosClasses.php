@@ -19,7 +19,10 @@
 ?>
 
 <?php
-	class IngressosClasses {
+
+	require_once("defaultmodel.php");
+
+	class IngressosClasses extends DefaultModel {
 		private $id;
 		private $nome;
 		private $total;
@@ -39,7 +42,8 @@
 						$this->$attrName = $args[$key];
 					}
 					else{
-						throw new Exception(IngressosClasses::errorMsg($attrName), 1);
+						// throw new Exception(IngressosClasses::errorMsg($attrName), 1);
+						$this->errors[] = IngressosClasses::errorMsg($attrName);
 					}
 				}
 			}
@@ -54,7 +58,9 @@
 				$this->$attrName = $attrValue;
 			}
 			else{
-				throw new Exception(IngressosClasses::errorMsg($attrName), 1);
+				// throw new Exception(IngressosClasses::errorMsg($attrName), 1);
+				$this->errors[] = IngressosClasses::errorMsg($attrName);
+				echo IngressosClasses::errorMsg($attrName);
 			}
 		}
 
@@ -64,19 +70,19 @@
 
 			switch ($attrName) {
 				case 'id':
-					return $tam != 0;
+					return true; // $tam != 0;
 
 				case 'nome':
 					return ($tam > 0 && $tam <= 30);
 					
 				case 'total':
-					return ((int)$attrValue) >= 0;
+					// return is_numeric($attrValue); // ((int)$attrValue) >= 0;
 				
 				case 'vendidos':
-					return ((int)$attrValue) >= 0;			
+					// return ((int)$attrValue) >= 0;			
 
 				case 'valor':
-					return ((int)$attrValue) >= 0;
+					return is_numeric($attrValue); // ((int)$attrValue) >= 0; // return ((int)$attrValue) >= 0;
 
 				case 'partida_id':
 					return (is_numeric($attrValue));
@@ -85,7 +91,7 @@
 					return false;
 
 				default:
-					throw new Exception("O atributo ".$attrName." não pertence a esta classe. Atributo desconhecido!", 1);
+					return false; // throw new Exception("O atributo ".$attrName." não pertence a esta classe. Atributo desconhecido!", 1);
 					
 			}
 		}

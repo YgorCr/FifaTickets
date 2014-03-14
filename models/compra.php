@@ -19,7 +19,10 @@
 ?>
 
 <?php
-	class Compra {
+
+	require_once("defaultmodel.php");
+
+	class Compra extends DefaultModel {
 		private $id;
 		private $data;
 		private $forma_de_pagamento;
@@ -37,7 +40,8 @@
 						$this->$attrName = $args[$key];
 					}
 					else{
-						throw new Exception(Compra::errorMsg($attrName), 1);
+						// throw new Exception(Compra::errorMsg($attrName), 1);
+						$this->errors[] = Compra::errorMsg($attrName);
 					}
 				}
 			}
@@ -52,7 +56,9 @@
 				$this->$attrName = $attrValue;
 			}
 			else{
-				throw new Exception(Compra::errorMsg($attrName), 1);
+				// throw new Exception(Compra::errorMsg($attrName), 1);
+				$this->errors[] = Compra::errorMsg($attrName);
+				echo Compra::errorMsg($attrName);
 			}
 		}
 
@@ -78,7 +84,7 @@
 					return false;
 
 				default:
-					throw new Exception("O atributo ".$attrName." não pertence a esta classe. Atributo desconhecido!", 1);
+					return false; // throw new Exception("O atributo ".$attrName." não pertence a esta classe. Atributo desconhecido!", 1);
 			}
 		}
 

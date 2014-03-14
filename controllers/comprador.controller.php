@@ -63,6 +63,11 @@
 
 		public function create($comprador)
 		{
+			$cpf = $comprador->get("cpf_cod");
+			$res = $this->db->run("SELECT COUNT(*) FROM comprador WHERE cpf_cod='".$cpf."'");
+			if($res[0]["count"]>0)
+				return -1;
+
 			$all = $comprador->get("attr");
 			$values = array();
 			foreach ($all as &$value) {

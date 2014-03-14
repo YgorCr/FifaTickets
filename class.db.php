@@ -15,7 +15,7 @@ class db extends PDO {
 		try {
 			parent::__construct($dsn, $user, $passwd, $options);
 		} catch (PDOException $e) {
-			echo $e->getMessage();
+			// echo $e->getMessage();
 			$this->error = $e->getMessage();
 		}
 	}
@@ -122,7 +122,7 @@ class db extends PDO {
 			}	
 		} catch (PDOException $e) {
 			$this->error = $e->getMessage();
-			echo $this->error;
+			// echo $this->error;
 			$this->debug();
 			return false;
 		}

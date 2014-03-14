@@ -16,8 +16,12 @@
 	}	
 	/******* END TESTE *********/
 ?>
+
 <?php
-	class Ingresso {
+
+	require_once("defaultmodel.php");
+
+	class Ingresso extends DefaultModel {
 		private $id;
 		private $data;
 		private $ingressos_classes_id;
@@ -36,7 +40,8 @@
 						$this->$attrName = $args[$key];
 					}
 					else{
-						throw new Exception(Ingresso::errorMsg($attrName), 1);
+						// throw new Exception(Ingresso::errorMsg($attrName), 1);
+						$this->errors[] = Ingresso::errorMsg($attrName);
 					}
 				}
 			}
@@ -51,7 +56,9 @@
 				$this->$attrName = $attrValue;
 			}
 			else{
-				throw new Exception(Ingresso::errorMsg($attrName), 1);
+				// throw new Exception(Ingresso::errorMsg($attrName), 1);
+				$this->errors[] = Ingresso::errorMsg($attrName);
+				echo Ingresso::errorMsg($attrName);
 			}
 		}
 
@@ -80,7 +87,7 @@
 					return false;
 
 				default:
-					throw new Exception("O atributo ".$attrName." não pertence a esta classe. Atributo desconhecido!", 1);
+					return false; // throw new Exception("O atributo ".$attrName." não pertence a esta classe. Atributo desconhecido!", 1);
 			}
 		}
 

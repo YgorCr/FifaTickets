@@ -19,7 +19,10 @@
 ?>
 
 <?php
-	class Comprador {
+
+	require_once("defaultmodel.php");
+
+	class Comprador extends DefaultModel {
 		private $id;
 		private $nome;
 		private $cpf_cod;
@@ -43,7 +46,8 @@
 						$this->$attrName = $args[$key];
 					}
 					else{
-						throw new Exception(Comprador::errorMsg($attrName), 1);
+						// throw new Exception(Comprador::errorMsg($attrName), 1);
+						$this->errors[] = Comprador::errorMsg($attrName);
 					}
 				}
 			}
@@ -58,7 +62,9 @@
 				$this->$attrName = $attrValue;
 			}
 			else{
-				throw new Exception(Comprador::errorMsg($attrName), 1);
+				// throw new Exception(Comprador::errorMsg($attrName), 1);
+				$this->errors[] = Comprador::errorMsg($attrName);
+				echo Comprador::errorMsg($attrName);
 			}
 		}
 

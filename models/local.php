@@ -19,7 +19,10 @@
 ?>
 
 <?php
-	class Local {
+
+	require_once("defaultmodel.php");
+
+	class Local extends DefaultModel {
 		private $id;
 		private $nome;
 		private $estado;
@@ -40,7 +43,8 @@
 						$this->$attrName = $args[$key];
 					}
 					else{
-						throw new Exception(Local::errorMsg($attrName), 1);
+						// throw new Exception(Local::errorMsg($attrName), 1);
+						$this->errors[] = Local::errorMsg($attrName);
 					}
 				}
 			}
@@ -55,7 +59,9 @@
 				$this->$attrName = $attrValue;
 			}
 			else{
-				throw new Exception(Local::errorMsg($attrName), 1);
+				// throw new Exception(Local::errorMsg($attrName), 1);
+				$this->errors[] = Local::errorMsg($attrName);
+				echo Local::errorMsg($attrName);
 			}
 		}
 
@@ -85,7 +91,7 @@
 					return false;
 
 				default:
-					throw new Exception("O atributo ".$attrName." não pertence a esta classe. Atributo desconhecido!", 1);
+					return false; // throw new Exception("O atributo ".$attrName." não pertence a esta classe. Atributo desconhecido!", 1);
 					
 			}
 		}

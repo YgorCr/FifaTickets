@@ -54,36 +54,53 @@
     $nome = $_POST["nome"];
     $total = $_POST["total"];
     $valor = $_POST["valor"];
-    $vendidos = $_POST["vendidos"];
+    $vendidos = "0";
     $partida_id = $_POST["partida_id"];
 
-    $ingressoClasse->set("nome", $nome);
-    $ingressoClasse->set("total", $total);
-    $ingressoClasse->set("valor", formatValor($valor, true));
-    $ingressoClasse->set("vendidos", $vendidos);
-    $ingressoClasse->set("partida_id", $partida_id);
-
-    $restante = calcRestante($partida_id, $total, $partidaCtr, $ingressosClassesCtr, $localCtr);
-    if($restante>=$total)
+    if($nome && 
+    $total && 
+    $valor && 
+    $partida_id )
     {
 
-      if(isset($ingressoClasse_id))
+      $ingressoClasse->set("nome", $nome);
+      $ingressoClasse->set("total", $total);
+      $ingressoClasse->set("valor", formatValor($valor, true));
+      $ingressoClasse->set("vendidos", $vendidos);
+      $ingressoClasse->set("partida_id", $partida_id);
+
+      $restante = calcRestante($partida_id, $total, $partidaCtr, $ingressosClassesCtr, $localCtr);
+      if($restante>=$total)
       {
-        if($ingressosClassesCtr->update($ingressoClasse))
-          $successMsg = "Classe atualizada com sucesso!";
+
+        if(isset($ingressoClasse_id))
+        {
+          if($ingressosClassesCtr->update($ingressoClasse))
+            $successMsg = "Classe atualizada com sucesso!";
+        } else {
+          $ingressoClasse = $ingressosClassesCtr->create($ingressoClasse);
+          $ingressoClasse_id = $ingressoClasse->get("id");
+          $successMsg = "Classe cadastrada com sucesso!";
+        }
+        
+        if(!$ingressoClasse || count($ingressoClasse->getErrors())>0 )
+        {
+          $errorMsg = "Erro ao cadastrar classe!";
+          $successMsg="";
+        }
+
       } else {
-        $ingressoClasse = $ingressosClassesCtr->create($ingressoClasse);
-        $ingressoClasse_id = $ingressoClasse->get("id");
-        $successMsg = "Classe cadastrada com sucesso!";
+        $errorMsg = "Quantidade acima da capacidade do local!";
       }
-      
-      if(!$ingressoClasse)
+
+      if(!$ingressoClasse || count($ingressoClasse->getErrors())>0 )
       {
         $errorMsg = "Erro ao cadastrar classe!";
+        $successMsg="";
       }
 
     } else {
-      $errorMsg = "Quantidade acima da capacidade do local!";
+      $errorMsg = "Preencha os campos obrigatórios!";
     }
 
   }
@@ -114,11 +131,7 @@
 </div>
 
 <?php
-  }
-?>
-
-<?php
-  if($successMsg) {
+  } else if($successMsg) {
 ?>
 
 <div class="panel panel-success">
@@ -129,7 +142,7 @@
 </div>
 
 <?php
-  }
+  } else {
 ?>
 
 <div class="panel panel-default">
@@ -183,6 +196,8 @@
 
   </div>
 </div>
+
+<?php } ?>
 
 <?php
 

@@ -72,7 +72,13 @@
 
 			$novoComprador = $compradorCtrl->create($novoComprador);
 
-			header("location:?a=comprador.login");
+			if($novoComprador==-1)
+			{
+				$ERROR = '<div class="panel panel-default">
+						<div class="panel-body" style = "background-color: #DDDDCC" ><font color="red">Erro ao cadastrar! Comprador já existe!.</font></div></div>';
+			} else {
+				header("location:?a=comprador.login");
+			}
 
 		}
 	}

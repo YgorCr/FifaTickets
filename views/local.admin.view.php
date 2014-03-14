@@ -31,27 +31,40 @@
 		$bairro = $_POST['bairro'];
 		$capacidade = $_POST['capacidade'];
 
-		$local->set("nome", $nome);
-		$local->set("estado", $estado);
-		$local->set("cidade", $cidade);
-		$local->set("rua", $rua);
-		$local->set("bairro", $bairro);
-		$local->set("capacidade", $capacidade);
-		
-		if(isset($local_id))
+		if($nome && 
+			$estado && 
+			$cidade && 
+			$rua && 
+			$bairro && 
+			$capacidade )
 		{
-			if($localCtr->update($local))
-				$successMsg = "Local atualizado com sucesso!";
+
+			$local->set("nome", $nome);
+			$local->set("estado", $estado);
+			$local->set("cidade", $cidade);
+			$local->set("rua", $rua);
+			$local->set("bairro", $bairro);
+			$local->set("capacidade", $capacidade);
+			
+			if(isset($local_id))
+			{
+				if($localCtr->update($local))
+					$successMsg = "Local atualizado com sucesso!";
+			} else {
+				$local = $localCtr->create($local);
+				$local_id = $local->get("id");
+				$successMsg = "Local cadastrado com sucesso!";
+			}
+			
+			if(!$local || count($local->getErrors())>0)
+			{
+				$errorMsg = "Erro ao cadastrar local!";
+			}
+
 		} else {
-			$local = $localCtr->create($local);
-			$local_id = $local->get("id");
-			$successMsg = "Local cadastrado com sucesso!";
+			$errorMsg = "Preencha os campos obrigatórios!";
 		}
-		
-		if(!$local)
-		{
-			$errorMsg = "Erro ao cadastrar local!";
-		}
+
 	}
 
 	if(isset($_GET["remove"]))
@@ -75,11 +88,7 @@
 </div>
 
 <?php
-  }
-?>
-
-<?php
-  if($successMsg) {
+  } else if($successMsg) {
 ?>
 
 <div class="panel panel-success">
@@ -90,7 +99,7 @@
 </div>
 
 <?php
-  }
+  } else {
 ?>
 
 <div class="panel panel-default">
@@ -173,6 +182,8 @@
 		</div>
 	</form>
 </div>
+
+<?php } ?>
 
 <?php
 

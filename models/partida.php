@@ -18,7 +18,10 @@
 ?>
 
 <?php
-	class Partida {
+
+	require_once("defaultmodel.php");
+
+	class Partida extends DefaultModel {
 		private $id;
 		private $nome;
 		private $data;
@@ -37,7 +40,8 @@
 						$this->$attrName = $args[$key];
 					}
 					else{
-						throw new Exception(Partida::errorMsg($attrName), 1);
+						// throw new Exception(Partida::errorMsg($attrName), 1);
+						$this->errors[] = Partida::errorMsg($attrName);
 					}
 				}
 			}
@@ -52,7 +56,9 @@
 				$this->$attrName = $attrValue;
 			}
 			else{
-				throw new Exception(Partida::errorMsg($attrName), 1);
+				// throw new Exception(Partida::errorMsg($attrName), 1);
+				$this->errors[] = Partida::errorMsg($attrName);
+				echo Partida::errorMsg($attrName);
 			}
 		}
 
@@ -81,7 +87,7 @@
 					return false;
 
 				default:
-					throw new Exception("O atributo ".$attrName." não pertence a esta classe. Atributo desconhecido!", 1);
+					return false; // throw new Exception("O atributo ".$attrName." não pertence a esta classe. Atributo desconhecido!", 1);
 			}
 		}
 

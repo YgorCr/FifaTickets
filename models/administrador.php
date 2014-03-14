@@ -1,5 +1,8 @@
 <?php
-	class Administrador {
+	
+	require_once("defaultmodel.php");
+
+	class Administrador extends DefaultModel {
 		private $id;
 		private $nome;
 		private $cpf_cod;
@@ -17,7 +20,9 @@
 						$this->$attrName = $args[$key];
 					}
 					else{
-						throw new Exception(Administrador::errorMsg($attrName), 1);
+						// throw new Exception(Administrador::errorMsg($attrName), 1);
+						$this->errors[] = Administrador::errorMsg($attrName);
+						echo Administrador::errorMsg($attrName);
 					}
 				}
 			}
@@ -32,7 +37,8 @@
 				$this->$attrName = $attrValue;
 			}
 			else{
-				throw new Exception(Administrador::errorMsg($attrName), 1);
+				// throw new Exception(Administrador::errorMsg($attrName), 1);
+				$this->errors[] = Administrador::errorMsg($attrName);
 			}
 		}
 
@@ -57,7 +63,7 @@
 					return false;
 
 				default:
-					throw new Exception("O atributo ".$attrName." não pertence a esta classe. Atributo desconhecido!", 1);
+					return false; // throw new Exception("O atributo ".$attrName." não pertence a esta classe. Atributo desconhecido!", 1);
 			}
 		}
 
