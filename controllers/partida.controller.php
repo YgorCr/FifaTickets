@@ -56,7 +56,7 @@
 		{
 			$partidas = array();
 
-			$sql = "SELECT * FROM ".$this->table." WHERE data>='".$data."'";
+			$sql = "SELECT * FROM ".$this->table." WHERE data>='".$data."' ORDER BY data ASC";
 			
 			if (isset($limit)) {
 				$sql = $sql." LIMIT $limit";
