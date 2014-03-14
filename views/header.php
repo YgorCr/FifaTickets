@@ -46,7 +46,7 @@
 
             <li 
               <?php if($ac=="comprador"){ ?> class="active" <?php } ?>
-               ><a href="?a=comprador">Meu cadastro</a></li>
+               ><a href="?a=comprador"> <?php if($comprador) echo "Minha conta"; else echo "Meu cadastro"; ?> </a></li>
 
             <li 
               <?php if($ac=="sobre"){ ?> class="active" <?php } ?>
@@ -63,6 +63,12 @@
               <?php } ?>
 
              </li>
+
+             <?php if($comprador) { ?>
+             <li>
+              <a href="?a=logout">Sair</a>
+             </li>
+             <?php } ?>
 
           </ul>
 
