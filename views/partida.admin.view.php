@@ -132,7 +132,16 @@
 
         <tr>
           <td class="tdlabel">Tipo<span style="color:red">*</span>: </td>
-          <td class="tdform"><input type="text" name="tipo" class="form-control" value="<?php echo $tipo; ?>"></td>
+          <td class="tdform">
+            <!-- <input type="text" name="tipo" class="form-control" value="<?php echo $tipo; ?>"> -->
+            <select name="tipo" class="form-control">
+              <option value="Grupos" <?php if($tipo=="Grupos") echo "selected=\"selected\""; ?> >Grupos</option>
+              <option value="Oitavas" <?php if($tipo=="Oitavas") echo "selected=\"selected\""; ?> >Oitavas</option>
+              <option value="Quartas" <?php if($tipo=="Quartas") echo "selected=\"selected\""; ?> >Quartas</option>
+              <option value="Semifinais" <?php if($tipo=="Semifinais") echo "selected=\"selected\""; ?> >Semifinais</option>
+              <option value="Finais" <?php if($tipo=="Finais") echo "selected=\"selected\""; ?> >Finais</option>
+            </select>
+          </td>
         </tr>        
 
         <tr>

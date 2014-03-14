@@ -60,7 +60,7 @@
 
 		    	<tr>
 		    		<td>Arrecadado:</td>
-		    		<td><?php echo $totalArrecadado; ?></td>
+		    		<td>R$ <?php echo $totalArrecadado; ?></td>
 		    	</tr>
 
 		    </table>
@@ -88,7 +88,7 @@
 			<?php
 				foreach ($partidas as $key => $partida) {
 					$local = $localCtr->byId($partida->get("local_id"));
-					$class = ($key%2)?("success"):("");
+					$class = ($key%2)?("info"):("");
 			?>
 					<tr class = "<?php echo $class; ?>" >
 						<td><?php echo $partida->get("id"); ?></td>
