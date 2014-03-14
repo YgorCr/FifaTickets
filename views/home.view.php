@@ -23,6 +23,14 @@
 
 	$totalPartidas = count($ptCtr->all(0));
 
+	$totalArrecadado = 0.0;
+	$ingressosCtr = new IngressoController($db);
+	$ingressos = $ingressosCtr->all(0);
+	foreach ($ingressos as $ingresso) {
+		$classe = $ingressosClassesCtr->byId($ingresso->get("ingressos_classes_id"));
+		$totalArrecadado = $totalArrecadado + $classe->get("valor");
+	}
+
 ?>
 
 <div id="home-wrapper">
@@ -48,6 +56,11 @@
 		    	<tr>
 		    		<td>Partidas:</td>
 		    		<td><?php echo $totalPartidas; ?></td>
+		    	</tr>
+
+		    	<tr>
+		    		<td>Arrecadado:</td>
+		    		<td><?php echo $totalArrecadado; ?></td>
 		    	</tr>
 
 		    </table>
